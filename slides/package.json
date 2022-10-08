@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "marp slides.md",
+    "watch": "marp -w slides.md"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^2.2.0"
+  }
+}
