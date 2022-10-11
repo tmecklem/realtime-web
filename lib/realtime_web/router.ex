@@ -10,10 +10,15 @@ defmodule RealtimeWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  scope "/", RealtimeWeb do
+  scope "/commerce", RealtimeWeb do
     pipe_through :browser
 
     live "/products/:id", ProductLive.Show, :show
+    live "/cart", CartLive.Show, :show
+  end
+
+  scope "/", RealtimeWeb do
+    pipe_through :browser
 
     get "/", Plug.Redirect, to: "/slides/index.html"
   end

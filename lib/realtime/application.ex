@@ -22,7 +22,8 @@ defmodule Realtime.Application do
       # Start a worker by calling: Realtime.Worker.start_link(arg)
       # {Realtime.Worker, arg}
 
-      {Registry, keys: :unique, name: Registry.ProductStockRegistry}
+      {Registry, keys: :unique, name: Registry.ProductStockRegistry},
+      {Registry, keys: :unique, name: Registry.CartRegistry}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

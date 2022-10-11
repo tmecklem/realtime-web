@@ -21,7 +21,6 @@ defmodule Realtime.Commerce.ProductInventory do
   end
 
   def product(sku), do: GenServer.call(via_tuple(sku), :product)
-
   def stock_level(sku), do: GenServer.call(via_tuple(sku), :stock_level)
 
   @impl GenServer

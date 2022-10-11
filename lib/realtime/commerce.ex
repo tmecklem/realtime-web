@@ -4,6 +4,7 @@ defmodule Realtime.Commerce do
   """
 
   alias Realtime.Commerce.ProductInventory
+  alias Realtime.Commerce.Cart
 
   @doc """
   Gets a single product.
@@ -20,5 +21,13 @@ defmodule Realtime.Commerce do
     |> case do
       {:ok, product} -> product
     end
+  end
+
+  def add_to_cart(user, product) do
+    Cart.add_to_cart(user, product)
+  end
+
+  def get_items(user) do
+    Cart.get_items(user)
   end
 end
