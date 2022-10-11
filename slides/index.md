@@ -110,3 +110,9 @@ When we're talking about delivering information to users in real-time in a way t
 (Tim)
 One note: if you are a backend developer listening to this talk, don't tune out to the stuff that seems unrelated to your work. It's not. As we'll demonstrate, we can't meet users' realtime needs without end-to-end solutions.
 -->
+
+---
+
+<iframe src="/products/scarce-scarf" style="width:40%" frameBorder="1"></iframe>
+
+---
