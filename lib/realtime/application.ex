@@ -23,7 +23,8 @@ defmodule Realtime.Application do
       # {Realtime.Worker, arg}
 
       {Registry, keys: :unique, name: Registry.ProductStockRegistry},
-      {Registry, keys: :unique, name: Registry.CartRegistry}
+      {Registry, keys: :unique, name: Registry.CartRegistry},
+      {DynamicSupervisor, name: Realtime.CartSupervisor}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

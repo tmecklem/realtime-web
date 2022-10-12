@@ -11,11 +11,14 @@ defmodule RealtimeWeb.ProductLive.Show do
 
   @impl true
   def handle_params(%{"id" => sku, "user_id" => user_id, "user_name" => user_name}, _, socket) do
+    user = User.new(%{id: user_id, name: user_name})
+    product = Commerce.get_product!(sku)
+
     {:noreply,
      socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:user, %User{id: user_id, name: user_name})
-     |> assign(:product, Commerce.get_product!(sku))}
+     |> assign(:user, user)
+     |> assign(:product, product)
+     |> assign(:button_state, button_state(user, product))}
   end
 
   @impl true
@@ -34,6 +37,11 @@ defmodule RealtimeWeb.ProductLive.Show do
     end
   end
 
-  defp page_title(:show), do: "Show Product"
-  defp page_title(:edit), do: "Edit Product"
+  defp button_state(user, product) do
+    cond do
+      Commerce.product_in_cart?(user, product.sku) -> {true, "Already in cart"}
+      product.stock_level < 1 -> {true, "Out of stock"}
+      true -> {false, "Add to cart"}
+    end
+  end
 end

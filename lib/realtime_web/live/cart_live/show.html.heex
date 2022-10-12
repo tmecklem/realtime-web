@@ -1,13 +1,16 @@
-<html>
-  <head>
-    <title>Cart</title>
-  </head>
-  <body>
-    <h1>Cart</h1>
-    <ul>
-      <%= for item <- @items do %>
-        <li><%= item.name %></li>
-      <% end %>
-    </ul>
-  </body>
-</html>
+<h1>Welcome, <%= @user.name %></h1>
+<h2>Cart</h2>
+<ul>
+  <%= for item <- @items do %>
+    <li>
+      <%= live_patch item.name, to: Routes.product_show_path(@socket, :show, item.sku, user_id: @user.id, user_name: @user.name) %>
+      <button phx-click="remove_from_cart" phx-value-sku={item.sku}>Remove</button>
+    </li>
+  <% end %>
+
+  <%= if Enum.empty?(@items) do %>
+    There's nothing here. Check out a <%= live_patch "product", to: Routes.product_show_path(@socket, :show, "scarce-scarf", user_id: @user.id, user_name: @user.name) %>
+  <% else %>
+    <button phx-click="checkout">Checkout!</button>
+  <% end %>
+</ul>

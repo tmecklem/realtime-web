@@ -113,6 +113,9 @@ One note: if you are a backend developer listening to this talk, don't tune out 
 
 ---
 
-<iframe src="/commerce/products/scarce-scarf?user_id=1&user_name=Tim" style="width:40%" frameBorder="1"></iframe>
+<iframe style="display:inline-block;float:left;width:33%;height:600px;"
+  src="/commerce/products/scarce-scarf?user_id=11&user_name=Tim" frameBorder="1"></iframe>
+<iframe style="display:inline-block;float:left;width:33%;height:600px;"
+  src="/commerce/products/scarce-scarf?user_id=12&user_name=Katie" frameBorder="1"></iframe>
 
 ---

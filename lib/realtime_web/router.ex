@@ -15,6 +15,7 @@ defmodule RealtimeWeb.Router do
 
     live "/products/:id", ProductLive.Show, :show
     live "/cart", CartLive.Show, :show
+    live "/checkout", CheckoutLive.Show, :show
   end
 
   scope "/", RealtimeWeb do
