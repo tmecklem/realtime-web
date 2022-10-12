@@ -19,11 +19,13 @@ defmodule RealtimeWeb.CartLive.Show do
      |> assign(:items, Commerce.get_items(user))}
   end
 
+  @impl true
   def handle_event("remove_from_cart", %{"sku" => sku}, socket) do
     items = Commerce.remove_from_cart(socket.assigns.user, Commerce.get_product!(sku))
     {:noreply, assign(socket, items: items)}
   end
 
+  @impl true
   def handle_event("checkout", _value, socket) do
     case Commerce.checkout(socket.assigns.user, socket.assigns.items) do
       :ok ->

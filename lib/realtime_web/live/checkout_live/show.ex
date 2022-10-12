@@ -14,6 +14,7 @@ defmodule RealtimeWeb.CheckoutLive.Show do
     {:noreply, assign(socket, user: user)}
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
     Thank you for your business, <%=@user.name%>!
