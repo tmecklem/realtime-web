@@ -141,6 +141,11 @@ Katie - talk about empathy with the user and their goals and needs
 
 # One potential solution
 
+<iframe style="display:inline-block;float:left;width:33%;height:600px;"
+  src="/commerce/better_products/rare-raincoat?user_id=11&user_name=Tim" frameBorder="1"></iframe>
+<iframe style="display:inline-block;float:left;width:33%;height:600px;"
+  src="/commerce/better_products/rare-raincoat?user_id=12&user_name=Katie" frameBorder="1"></iframe>
+
 Tim
 
 Drive the demo of the cart that improves the experience

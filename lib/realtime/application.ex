@@ -24,6 +24,8 @@ defmodule Realtime.Application do
 
       {Registry, keys: :unique, name: Registry.ProductStockRegistry},
       {Registry, keys: :unique, name: Registry.CartRegistry},
+      {Registry, keys: :duplicate, name: Realtime.Commerce.InventoryEvents},
+      {Registry, keys: :duplicate, name: Realtime.Commerce.CartEvents},
       {DynamicSupervisor, name: Realtime.CartSupervisor}
     ]
 
@@ -46,6 +48,9 @@ defmodule Realtime.Application do
   defp initialize_products do
     ProductInventory.start_link(
       product: %Product{name: "Scarce Scarf", sku: "scarce-scarf", stock_level: 1}
+    )
+    ProductInventory.start_link(
+      product: %Product{name: "Rare Raincoat", sku: "rare-raincoat", stock_level: 1}
     )
   end
 end

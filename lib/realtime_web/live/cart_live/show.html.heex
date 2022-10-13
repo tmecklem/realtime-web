@@ -3,13 +3,14 @@
 <ul>
   <%= for item <- @items do %>
     <li>
-      <%= live_patch item.name, to: Routes.product_show_path(@socket, :show, item.sku, user_id: @user.id, user_name: @user.name) %>
+      <%= item.sku %>
       <button phx-click="remove_from_cart" phx-value-sku={item.sku}>Remove</button>
     </li>
   <% end %>
 
+  <%= if @countdown_time do %><div>You have <%= @countdown_time %> left to checkout</div><% end %>
   <%= if Enum.empty?(@items) do %>
-    There's nothing here. Check out a <%= live_patch "product", to: Routes.product_show_path(@socket, :show, "scarce-scarf", user_id: @user.id, user_name: @user.name) %>
+    There's nothing here. Check out a <%= link "product", to: @back_link %>
   <% else %>
     <button phx-click="checkout">Checkout!</button>
   <% end %>

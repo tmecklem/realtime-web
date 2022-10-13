@@ -2,6 +2,7 @@ defmodule Realtime.Commerce.ProductInventory do
   use GenServer
 
   alias Realtime.Commerce.Product
+  alias Realtime.Commerce.InventoryEvents
 
   def start_link(opts) do
     product = %Product{} = Keyword.fetch!(opts, :product)
@@ -20,6 +21,7 @@ defmodule Realtime.Commerce.ProductInventory do
   def product(sku), do: GenServer.call(via_tuple(sku), :product)
   def stock_level(sku), do: GenServer.call(via_tuple(sku), :stock_level)
   def claim_product(sku), do: GenServer.call(via_tuple(sku), :claim_product)
+  def unclaim_product(sku), do: GenServer.call(via_tuple(sku), :unclaim_product)
 
   @impl GenServer
   def handle_call(:product, _from, %{product: %Product{} = product} = state) do
@@ -35,13 +37,30 @@ defmodule Realtime.Commerce.ProductInventory do
   def handle_call(
         :claim_product,
         _from,
-        %{product: %Product{stock_level: stock_level} = product} = state
+        %{product: %Product{sku: sku, stock_level: stock_level} = product} = state
       ) do
     if stock_level > 0 do
-      {:reply, true, %{product: %{product | stock_level: stock_level - 1}}}
+      updated_product = %{product | stock_level: stock_level - 1}
+
+      InventoryEvents.notify(sku, :inventory_changed, updated_product)
+
+      {:reply, true, %{product: updated_product}}
     else
       {:reply, false, state}
     end
+  end
+
+  @impl GenServer
+  def handle_call(
+        :unclaim_product,
+        _from,
+        %{product: %Product{sku: sku, stock_level: stock_level} = product} = state
+      ) do
+    updated_product = %{product | stock_level: stock_level + 1}
+
+    InventoryEvents.notify(sku, :inventory_changed, updated_product)
+
+    {:reply, true, %{state | product: updated_product}}
   end
 
   defp via_tuple(sku) do

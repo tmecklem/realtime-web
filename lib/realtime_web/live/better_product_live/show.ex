@@ -1,7 +1,9 @@
-defmodule RealtimeWeb.ProductLive.Show do
+defmodule RealtimeWeb.BetterProductLive.Show do
   use RealtimeWeb, :live_view
 
   alias Realtime.Commerce
+  alias Realtime.Commerce.InventoryEvents
+  alias Realtime.Commerce.Product
   alias Realtime.Commerce.User
 
   @impl true
@@ -14,6 +16,8 @@ defmodule RealtimeWeb.ProductLive.Show do
     user = User.new(%{id: user_id, name: user_name})
     product = Commerce.get_product!(sku)
 
+    if connected?(socket), do: InventoryEvents.listen_for_events(product)
+
     {:noreply,
      socket
      |> assign(:user, user)
@@ -23,7 +27,7 @@ defmodule RealtimeWeb.ProductLive.Show do
 
   @impl true
   def handle_event("add_to_cart", _value, socket) do
-    case Commerce.add_to_cart(socket.assigns.user, socket.assigns.product) do
+    case Commerce.exclusive_add_to_cart(socket.assigns.user, socket.assigns.product) do
       :ok ->
         {:noreply,
          socket
@@ -33,12 +37,24 @@ defmodule RealtimeWeb.ProductLive.Show do
                user_id: socket.assigns.user.id,
                user_name: socket.assigns.user.name,
                back_link:
-                 Routes.product_show_path(socket, :show, socket.assigns.product.sku,
+                 Routes.better_product_show_path(socket, :show, socket.assigns.product.sku,
                    user_id: socket.assigns.user.id,
                    user_name: socket.assigns.user.name
                  )
              )
          )}
+    end
+  end
+
+  @impl true
+  def handle_info({:inventory_changed, %Product{sku: sku} = product}, socket) do
+    if socket.assigns.product.sku == sku do
+      {:noreply,
+       socket
+       |> assign(:button_state, button_state(socket.assigns.user, product))
+       |> assign(product: product)}
+    else
+      {:noreply, socket}
     end
   end
 

@@ -10,5 +10,5 @@
 <button phx-click="add_to_cart" disabled={elem(@button_state, 0)}><%=elem(@button_state, 1)%></button>
 
 <%= link "View Cart", to: Routes.cart_show_path(@socket, :show, user_id: @user.id, user_name: @user.name,
-    back_link: Routes.product_show_path(@socket, :show, @product.sku, user_id: @user.id, user_name: @user.name)
+    back_link: Routes.better_product_show_path(@socket, :show, @product.sku, user_id: @user.id, user_name: @user.name)
 ) %>
