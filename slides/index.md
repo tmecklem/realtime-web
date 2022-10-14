@@ -133,7 +133,7 @@ Tim
 
 # What are the problems here
 
-Tim - obvious probvlems for the dev team and company
+Tim - obvious problems for the dev team and company
 
 Katie - talk about empathy with the user and their goals and needs
 
@@ -141,10 +141,10 @@ Katie - talk about empathy with the user and their goals and needs
 
 # One potential solution
 
-<iframe style="display:inline-block;float:left;width:33%;height:600px;"
-  src="/commerce/better_products/rare-raincoat?user_id=11&user_name=Tim" frameBorder="1"></iframe>
-<iframe style="display:inline-block;float:left;width:33%;height:600px;"
-  src="/commerce/better_products/rare-raincoat?user_id=12&user_name=Katie" frameBorder="1"></iframe>
+<iframe style="display:inline-block;float:left;width:33%;height:800px;"
+  src="/commerce/better_products/rare-raincoat?user_id=110&user_name=Parker" frameBorder="1"></iframe>
+<iframe style="display:inline-block;float:left;width:33%;height:800px;"
+  src="/commerce/better_products/rare-raincoat?user_id=120&user_name=Andrew" frameBorder="1"></iframe>
 
 Tim
 

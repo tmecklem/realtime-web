@@ -31,12 +31,7 @@ defmodule RealtimeWeb.ProductLive.Show do
            to:
              Routes.cart_show_path(socket, :show,
                user_id: socket.assigns.user.id,
-               user_name: socket.assigns.user.name,
-               back_link:
-                 Routes.product_show_path(socket, :show, socket.assigns.product.sku,
-                   user_id: socket.assigns.user.id,
-                   user_name: socket.assigns.user.name
-                 )
+               user_name: socket.assigns.user.name
              )
          )}
     end

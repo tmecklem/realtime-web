@@ -1,14 +1,10 @@
-<h1>Welcome, <%= @user.name %></h1>
-<h2><%= @product.name %></h2>
+Welcome, <%= @user.name %>
+<span style="float: right;">
+  <%= link "View Cart", to: Routes.cart_show_path(@socket, :show, user_id: @user.id, user_name: @user.name) %>
+</span>
 
-<strong>Sku:</strong>
-<%= @product.sku %>
-
-<strong>Stock level:</strong>
-<%= @product.stock_level %>
-
-<button phx-click="add_to_cart" disabled={elem(@button_state, 0)}><%=elem(@button_state, 1)%></button>
-
-<%= link "View Cart", to: Routes.cart_show_path(@socket, :show, user_id: @user.id, user_name: @user.name,
-    back_link: Routes.product_show_path(@socket, :show, @product.sku, user_id: @user.id, user_name: @user.name)
-) %>
+<h1><%= @product.name %></h1>
+<%= @product.stock_level %> in stock
+<p>
+  <button phx-click="add_to_cart" disabled={elem(@button_state, 0)}><%=elem(@button_state, 1)%></button>
+</p>

@@ -14,9 +14,12 @@ defmodule RealtimeWeb.Router do
     pipe_through :browser
 
     live "/products/:id", ProductLive.Show, :show
-    live "/better_products/:id", BetterProductLive.Show, :show
     live "/cart", CartLive.Show, :show
     live "/checkout", CheckoutLive.Show, :show
+
+    live "/better_products/:id", BetterProductLive.Show, :show
+    live "/better_cart", BetterCartLive.Show, :show
+    live "/better_checkout", BetterCheckoutLive.Show, :show
   end
 
   scope "/", RealtimeWeb do

@@ -46,11 +46,7 @@ defmodule Realtime.Application do
   end
 
   defp initialize_products do
-    ProductInventory.start_link(
-      product: %Product{name: "Scarce Scarf", sku: "scarce-scarf", stock_level: 1}
-    )
-    ProductInventory.start_link(
-      product: %Product{name: "Rare Raincoat", sku: "rare-raincoat", stock_level: 1}
-    )
+    ProductInventory.start_link(product: %Product{name: "Scarce Scarf", sku: "scarce-scarf", stock_level: 1})
+    ProductInventory.start_link(product: %Product{name: "Rare Raincoat", sku: "rare-raincoat", stock_level: 1})
   end
 end

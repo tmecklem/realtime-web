@@ -1,7 +1,7 @@
 defmodule RealtimeWeb.BetterProductLive.Show do
   use RealtimeWeb, :live_view
 
-  alias Realtime.Commerce
+  alias Realtime.BetterCommerce
   alias Realtime.Commerce.InventoryEvents
   alias Realtime.Commerce.Product
   alias Realtime.Commerce.User
@@ -14,7 +14,7 @@ defmodule RealtimeWeb.BetterProductLive.Show do
   @impl true
   def handle_params(%{"id" => sku, "user_id" => user_id, "user_name" => user_name}, _, socket) do
     user = User.new(%{id: user_id, name: user_name})
-    product = Commerce.get_product!(sku)
+    product = BetterCommerce.get_product!(sku)
 
     if connected?(socket), do: InventoryEvents.listen_for_events(product)
 
@@ -27,20 +27,15 @@ defmodule RealtimeWeb.BetterProductLive.Show do
 
   @impl true
   def handle_event("add_to_cart", _value, socket) do
-    case Commerce.exclusive_add_to_cart(socket.assigns.user, socket.assigns.product) do
+    case BetterCommerce.exclusive_add_to_cart(socket.assigns.user, socket.assigns.product) do
       :ok ->
         {:noreply,
          socket
          |> push_navigate(
            to:
-             Routes.cart_show_path(socket, :show,
+             Routes.better_cart_show_path(socket, :show,
                user_id: socket.assigns.user.id,
-               user_name: socket.assigns.user.name,
-               back_link:
-                 Routes.better_product_show_path(socket, :show, socket.assigns.product.sku,
-                   user_id: socket.assigns.user.id,
-                   user_name: socket.assigns.user.name
-                 )
+               user_name: socket.assigns.user.name
              )
          )}
     end
@@ -60,7 +55,7 @@ defmodule RealtimeWeb.BetterProductLive.Show do
 
   defp button_state(user, product) do
     cond do
-      Commerce.product_in_cart?(user, product.sku) -> {true, "Already in cart"}
+      BetterCommerce.product_in_cart?(user, product.sku) -> {true, "Already in cart"}
       product.stock_level < 1 -> {true, "Out of stock"}
       true -> {false, "Add to cart"}
     end

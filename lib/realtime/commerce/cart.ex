@@ -26,22 +26,18 @@ defmodule Realtime.Commerce.Cart do
     {:ok, %{user_id: user_id, items: []}}
   end
 
-  def add_to_cart(%User{} = user, %Product{} = product),
-    do: GenServer.call(cart_process(user), {:add_to_cart, product})
+  def add_to_cart(%User{} = user, %Product{} = product), do: GenServer.call(cart_process(user), {:add_to_cart, product})
 
-  def remove_from_cart(%User{} = user, sku),
-    do: GenServer.call(cart_process(user), {:remove_from_cart, sku})
+  def remove_from_cart(%User{} = user, sku), do: GenServer.call(cart_process(user), {:remove_from_cart, sku})
 
-  def clear_cart(%User{} = user),
-    do: GenServer.call(cart_process(user), :clear_cart)
+  def clear_cart(%User{} = user), do: GenServer.call(cart_process(user), :clear_cart)
 
   def get_items(%User{} = user), do: GenServer.call(cart_process(user), :get_items)
 
-  def start_checkout_timer(%User{} = user, countdown_seconds),
-    do: GenServer.call(cart_process(user), {:start_checkout_timer, countdown_seconds})
+  def start_checkout_timer(%User{} = user, seconds),
+    do: GenServer.call(cart_process(user), {:start_checkout_timer, seconds})
 
-  def stop_checkout_timer(%User{} = user),
-    do: GenServer.call(cart_process(user), :stop_checkout_timer)
+  def stop_checkout_timer(%User{} = user), do: GenServer.call(cart_process(user), :stop_checkout_timer)
 
   @impl GenServer
   def handle_call({:add_to_cart, %Product{} = product}, _from, %{items: items} = state) do
