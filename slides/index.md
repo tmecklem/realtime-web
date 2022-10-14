@@ -54,6 +54,16 @@ style: |
     justify-content: start;
   }
 
+  section.closing {
+    text-align: center;
+  }
+
+  section.closing footer {
+    justify-content: center;
+    height: 200px;
+    padding-bottom: 2rem;
+  }
+
 ---
 
 <!--
@@ -236,47 +246,47 @@ You're on an ecommerce site, you find an item that you want to buy that's in hig
 # Rapid influx of data
 
 ---
-
----
 # Example -
----
 
 ---
 # What are the problems here?
----
 
 ---
 # One potential solution
----
 
 ---
 ### Why is this better?
 # _
----
 
 ---
 ### Problem 3:
 # Disconnections and partial realtime
 
 ---
-
----
 # Example -
----
 
 ---
 # What are the problems here?
----
 
 ---
 # One potential solution
----
 
 ---
 ### Why is this better?
 # _
----
 
+---
+# Tie all together with the backend stuff
+Tim
+
+---
+<!--
+_class: 'closing'
+_footer: '![image](images/launchscout-logo_inverse.png)'
+_backgroundColor: #190641
+_color: white
+ -->
+# Questions?
 
 ---
 
