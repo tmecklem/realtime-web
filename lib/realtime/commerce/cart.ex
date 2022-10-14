@@ -23,7 +23,7 @@ defmodule Realtime.Commerce.Cart do
       |> Keyword.fetch!(:user)
       |> Map.get(:id)
 
-    {:ok, %{user_id: user_id, items: []}}
+    {:ok, %{user_id: user_id, items: [], countdown_seconds: 0}}
   end
 
   def add_to_cart(%User{} = user, %Product{} = product), do: GenServer.call(cart_process(user), {:add_to_cart, product})
@@ -52,8 +52,10 @@ defmodule Realtime.Commerce.Cart do
   end
 
   @impl GenServer
-  def handle_call(:clear_cart, _from, state) do
-    {:reply, :ok, %{state | items: []}}
+  def handle_call(:clear_cart, _from, %{user_id: user_id} = state) do
+    CartEvents.notify(user_id, :countdown_seconds, 0)
+
+    {:reply, :ok, %{state | items: [], countdown_seconds: 0}}
   end
 
   @impl GenServer
