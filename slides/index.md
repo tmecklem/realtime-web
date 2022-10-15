@@ -140,14 +140,14 @@ With that in mind, let's talk about the principles through some common problems 
 
 ---
 
-### Problem 1:
+### Problem:
 # Scarce Resources
 
 <!--
 
 (Katie)
 
-The first problem we want to highlight today is the problem of scarce resources. Or maybe in more familiar terms, things like inventory management and out of stock situations. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event. And it is our job as designers and developers to make sure customers have the right information at the right time to make informed decisions about that buying process.
+The first problem we want to highlight today is the problem of scarce resources. And this problem is probably most commonly seen in systems that handle inventory management, such as out of stock situations. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event. And it is our job as designers and developers to make sure customers have the right information about an item at the right time to make informed decisions about that buying process. So, what state or status is the item in? Is it available for pre-order, is it available to purchase, is it out of stock? All of these things and more are questions that a customer has during the buying process.
 
 So let's take a look at what that may look like.
  -->
@@ -223,70 +223,68 @@ Drive the demo of the cart that improves the experience -->
 <!--
 (Katie)
 
-Why is this better? While there is still a bit of a race condition in that someone's "Add to Cart" button is disabled when they may be moving their cursor to click it, they at least are not able to to move forward in that process under false pretenses. Think of it as two people reaching for the same item on a shelf at the store. And while that may be awkward or frustrating and even rude, you at least know immediately that you can't get the thing that you were reaching for, so you go look for something else.
+Why is this better? While there is still a bit of a race condition in that someone's "Add to Cart" button is disabled when they may be moving their cursor to click it, they at least are not able to to move forward in that process under false pretenses. Think of it as two people reaching for the same item on a shelf at the store. And the other person grabs it before you can get to it. While that may be awkward or frustrating and even rude, you at least know immediately that you can't get the thing that you were reaching for, so you go look for something else.
 
-We're mimicking reality in this situation and letting users know the information as we know it so that they are aware of what they're actually able to do in the system.
-
--->
-
----
-
-Tell me if you can relate to any of these problems.
-
-<!--
-
-How many of you have been in the middle of reading a post or an article on the internet in a feed and had some late breaking new information come in and push down the content you were reading?
-
-You're on an ecommerce site, you find an item that you want to buy that's in high demand, and in between the time you add it to your cart and go to checkout, the item has gone out of stock.
+We're mimicking reality in this situation and letting users know the information as we know it so that they are aware of what they're actually able to do in the system. And we're not allowing them to move forward in the process under false pretenses. So they know when an item is "claimed" by another customer. And that other customer knows that they have a set amount of time to decide before they no longer have "dibs" on that item. So, it's really important in these types of situations, to make sure you are exposing the state of an item to the user, so that they know what they are able to do with it.
 
 -->
 
 ---
-### Problem 2:
+### Problem:
 # Rapid influx of data
 
+<!--
+(Katie)
+
+Alright, we've talked about systems that manage resources and making sure that we are exposing the realtime state or status of those resources to the user. And there are other types of systems that benefit from realtime data, as well. And one of the others that we want to highlight today are systems that handle rapidly changing data—so things like social media, or a news site, or maybe a polling system, or a dashboard of some sort. There are lots of examples of these types of systems. But the problem that presents itself in these systems is that we need to decide how to display the data to the user in a way that is not overwhelming. So, you can forgo it entirely and not worry about updating in real time. Which is bad because then your users don't know if the data their seeing is accurate and could be making a bad decision based on it or are just unaware of something that is happening. Or, you can decide to display the data coming in in realtime, which then raises the question of how to do that well.
+
+But, let's take a look first:
+ -->
+
 ---
 # Example -
+Tim - Social media/twitter feed that is moving too fast?
 
 ---
 # What are the problems here?
 
----
-# One potential solution
+<!--
+So, that seems pretty obvious, right? In this example, if you decide to just display everything as it comes in, you have to think about how that may work when the influx of data varies. What happens when the data comes in at a slower pace? At a higher pace? Or at a an insanely high pace? There is a threshold where this solution of "just show it to the user" doesn't work. And we have to make sure we identify it and address it. So, how do we do this better?
+ -->
 
----
-### Why is this better?
-# _
-
----
-### Problem 3:
-# Disconnections and partial realtime
-
----
-# Example -
-
----
-# What are the problems here?
 
 ---
 # One potential solution
+Tim - Shows a counter of new messages with the option to display them
 
 ---
 ### Why is this better?
-# _
+# Considers the intent of the data
+
+<!--
+(Katie)
+
+Why is this better? This is better because it considers the intent of the data. In this example, the data coming in is meant to be read. So instead of just displaying the posts as they come in and pushing everything down to where it's not readable because it is constantly moving—we're keeping everything in its place so that it can be consumed. And we're also letting you know that there is more to be seen when you are ready to see it.
+
+So, with our empathy hats on, we're thinking about what the user is intending to do with the data. Like I said, this example shows data that is meant to be read, so we are letting that happen—we're letting the user do what they need to do with the data, while also updating the page in realtime to let them know what is happening without interrupting them. So you have to think about what your user is trying to accomplish and make sure your solution supports that. You can't just spew a bunch of data on the screen and say, "Tada, it's realtime!" Because, depending on how you do it, it can actually be a bad thing.
+
+There are other intentions with data, as well, obviously, and those intentions should inform how you display the data to your users. So perhaps you have an email campaign that went out and you're really interested about where the campaign was most effective. You're getting data about who opened the emails, where they are, what time they opened them, etc. But it's likely not going to be helpful to see that data in a table in realtime because you can't really do anything with it without manipulating the data. What may actually be more helpful is to display that on a map and have sort of like a heat map of where emails are being opened geographically, and as they're being opened the heat map would adjust. This actually makes me think about the political maps everyone sees during an election. You could have the states gradually turning blue or red as votes are counted and you can visualize how the votes are shaping up in realtime.
+
+All of this to say, that when you are displaying realtime data to your users, it's crucial to consider how that data is intended to be used. Because if you show them the data in realtime in a way that doesn't consider their intentions, you're actually going to cause them frustration instead of helping them.
+
+We've been talking a lot about how to best display data in realtime, and it's been heavily focused on the design/front-end side of things. And I told you this is a end-to-end responsibility. So, let's bring it full-circle.
+ -->
 
 ---
 # Tie all together with the backend stuff
 Tim
 
 ---
-<!--
-_class: 'closing'
-_footer: '![image](images/launchscout-logo_inverse.png)'
-_backgroundColor: #190641
-_color: white
- -->
-# Questions?
+### Something to keep in mind
+# Disconnections and partial realtime
+Tim
+
+<!-- If you decide to tackle this, there will be a transition period where you have some 'dead' views and some realtime views—make it obvious which is which. Talk about Github page-->
 
 ---
 
@@ -299,5 +297,28 @@ _color: white
 How many of you have made a shiny new project, created a repository for it on GitHub, pushed your code, and then stared blankly at this screen waiting for it to pick up your amazing code only to realize that unlike the rest of GitHub, this page does is not driven by the `git push` command you just ran. Maybe this one's just me, and I'll take an L on that one if so :D.
 
 How about one final developer-centric one. How many of you have used a tool that has a hot-reload feature that supposed to update the browser when you save a file, only it's a Monday and for some reason the file watcher seems to be taking the day off?
+
+-->
+
+---
+<!--
+_class: 'closing'
+_footer: '![image](images/launchscout-logo_inverse.png)'
+_backgroundColor: #190641
+_color: white
+ -->
+# Questions?
+
+
+
+---
+
+Tell me if you can relate to any of these problems.
+
+<!--
+
+How many of you have been in the middle of reading a post or an article on the internet in a feed and had some late breaking new information come in and push down the content you were reading?
+
+You're on an ecommerce site, you find an item that you want to buy that's in high demand, and in between the time you add it to your cart and go to checkout, the item has gone out of stock.
 
 -->
