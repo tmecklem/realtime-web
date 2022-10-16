@@ -75,7 +75,13 @@ _color: white
 # Designing Realtime Web Apps
 ##### Katie Pohlman & Tim Mecklem
 
-<!-- Test for presenter notes -->
+<!--
+INTROS:
+
+Katie
+
+Hi! My name is Katie Pohlman and I am a Principal UX Designer at Launch Scout. Launch Scout is a custom software development agency based in Cincinnati, OH. And  
+ -->
 
 ---
 
@@ -110,7 +116,7 @@ Sometimes we fail to understand the needs of our users and how to support them. 
 ---
 
 ### The takeaway
-# Realtime user experiences require <u>end-to-end</u> solutions. (NEEDS WORDSMITHED)
+# Realtime user experiences require <u>end-to-end</u> solutions.
 
 <!--
 (Katie)
@@ -308,6 +314,7 @@ _backgroundColor: #190641
 _color: white
  -->
 # Questions?
+### launchscout.com
 
 
 
