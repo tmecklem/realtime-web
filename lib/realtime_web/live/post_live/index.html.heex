@@ -1,9 +1,34 @@
+<style>
+
+li.show {
+  animation: openspace .3s ease forwards,
+  fade-in-animation .3s .3s cubic-bezier(0,.8,.32,1.07) forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes openspace {
+    to {
+        height: auto;
+    }
+}
+
+@keyframes fade-in-animation {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+</style>
+
 <h2 phx-click="Hi">Posts!</h2>
-<div>
+<ul style="list-style-type: none;">
   <%= for post <- @posts do %>
-    <div>
-      <span><%= post.author %></span>
-      <span><%= post.content %></span>
-    </div>
+    <li class="">
+      <b style="font-size: 12px;"><%= post.author %></b>
+      <p><%= post.content %></p>
+    </li>
   <% end %>
-</div>
+</ul>
