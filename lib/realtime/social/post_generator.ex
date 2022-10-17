@@ -7,7 +7,7 @@ defmodule Realtime.Social.PostGenerator do
   alias Faker.Internet
   alias Faker.Lorem.Shakespeare
 
-  @wait_time 5000
+  @wait_time 800
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
@@ -38,9 +38,13 @@ defmodule Realtime.Social.PostGenerator do
       })
 
     PostEvents.notify(:post_created, post)
+    :timer.send_after(random_interval(wait_time), :post)
 
-    :timer.send_after(wait_time, :post)
     {:noreply, %{state | posts: Enum.take([post | posts], 100)}}
+  end
+
+  defp random_interval(wait_time) do
+    wait_time + max(trunc(wait_time * (Enum.random(-100..200) / 100.0)), 0)
   end
 
   defp get_random_content do
