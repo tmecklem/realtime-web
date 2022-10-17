@@ -301,7 +301,11 @@ So, that seems pretty obvious, right? In this example, if you decide to just dis
 
 ---
 ## One potential solution
-Tim - Shows a counter of new messages with the option to display them
+
+<div style="display: flex; gap: 1rem;">
+  <iframe style="display:inline-block;float:left;width:45%; height:30rem;" src="/social/posts" frameBorder="1"></iframe>
+  <iframe style="display:inline-block;float:left;width:45%; height:30rem;" src="/social/better_posts" frameBorder="1"></iframe>
+</div>
 
 ---
 ### Why is this better?

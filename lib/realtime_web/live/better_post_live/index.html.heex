@@ -23,12 +23,16 @@ li.show {
 }
 </style>
 
+<%= if length(@queued_posts) > 0 do %>
+  <div><a phx-click="refresh_posts">View <%= length(@queued_posts) %> newer posts</a></div>
+<% end %>
 <ul style="list-style-type: none;">
   <%= for post <- @posts do %>
     <li class="">
       <b style="font-size: 12px;"><%= post.author %></b>
       <p>
         <%= post.content %>
+
         <span><%= elem(post.location, 2) %>, <%= elem(post.location, 3) %></span>
       </p>
     </li>

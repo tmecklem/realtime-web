@@ -26,6 +26,7 @@ defmodule RealtimeWeb.Router do
     pipe_through :browser
 
     live "/posts", PostLive.Index, :index
+    live "/better_posts", BetterPostLive.Index, :index
   end
 
   scope "/", RealtimeWeb do
