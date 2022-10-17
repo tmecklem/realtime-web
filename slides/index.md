@@ -3,8 +3,38 @@ marp: true
 footer: '![image](images/launchscout-logo.png)'
 style: |
 
+  @font-face {
+    font-family: "Museo Sans";
+    src: url(fonts/MuseoSans_300.otf) format("otf");
+    font-weight: 300;
+  }
+
+  @font-face {
+    font-family: "Museo Sans";
+    src: url(fonts/MuseoSans_500.otf) format("otf");
+    font-weight: 500;
+  }
+
+  @font-face {
+    font-family: "Museo Sans";
+    src: url(fonts/MuseoSans_700.otf) format("otf");
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: "Museo Sans";
+    src: url(fonts/MuseoSans_900.otf) format("otf");
+    font-weight: 900;
+  }
+
+  @font-face {
+    font-family: "Oswald";
+    src: url(fonts/Oswald-Bold.ttf) format("ttf");
+    font-weight: bold;
+  }
+
   :root {
-    font-family: Helvetica, Ariel, sans-serif
+    font-family: Museo Sans, Helvetica, Ariel, sans-serif
   }
 
   img {
@@ -13,10 +43,17 @@ style: |
 
   section h1 {
     color: #6042BC;
+    font-size: 1.9rem;
+    line-height: 1.2;
+  }
+
+  section h2 {
+    font-weight: 500;
   }
 
   section h3 {
-    font-size: 1rem;
+    font-family: Oswald, Helvetica, Ariel, sans-serif;
+    font-size: .9rem;
     margin: 0;
     text-transform: uppercase;
   }
@@ -85,7 +122,7 @@ Hi! My name is Katie Pohlman and I am a Principal UX Designer at Launch Scout. L
 
 ---
 
-# Do today's web apps support real-time decisions better than the technologies they replaced?
+# Do today's web apps support real-time decisions better than the technologies <br/>they replaced?
 
 <!--
 
@@ -101,7 +138,7 @@ The exciting news is that web technologies have advanced far enough to support s
 
 ---
 
-# But we're just catching up to the capability of our tools
+# But we're just catching up to the <br/>capability of our tools
 
 <!--
 
@@ -116,7 +153,7 @@ Sometimes we fail to understand the needs of our users and how to support them. 
 ---
 
 ### The takeaway
-# Realtime user experiences require <u>end-to-end</u> solutions.
+# Realtime user experiences require <br/><u>end-to-end</u> solutions.
 
 <!--
 (Katie)
@@ -153,7 +190,7 @@ With that in mind, let's talk about the principles through some common problems 
 
 (Katie)
 
-The first problem we want to highlight today is the problem of scarce resources. And this problem is probably most commonly seen in systems that handle inventory management, such as out of stock situations. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event. And it is our job as designers and developers to make sure customers have the right information about an item at the right time to make informed decisions about that buying process. So, what state or status is the item in? Is it available for pre-order, is it available to purchase, is it out of stock? All of these things and more are questions that a customer has during the buying process.
+The first problem we want to highlight today is the problem of scarce resources. And this problem is probably most commonly seen in systems that handle inventory management, and an example of how that manifests itself is out of stock situations on ecommerce sites. So, let's look at ecommerce specifically. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event. And it is our job as designers and developers to make sure customers have the right information about an item at the right time to make informed decisions about that buying process. So, what state or status is the item in? Is it available for pre-order, is it available to purchase, is it out of stock? All of these things and more are questions that a customer has during the buying process.
 
 So let's take a look at what that may look like.
  -->
@@ -163,10 +200,10 @@ So let's take a look at what that may look like.
 ## Example - low inventory on a commerce page
 
 <div style="display: flex; gap: 1rem;">
-<iframe style="width:45%; height:30rem;"
-  src="/commerce/products/scarce-scarf?user_id=11&user_name=Tim" frameBorder="1"></iframe>
-<iframe style="display:inline-block;float:left;width:45%; height:30rem;"
-  src="/commerce/products/scarce-scarf?user_id=12&user_name=Katie" frameBorder="1"></iframe>
+<iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;"
+  src="/commerce/products/scarce-scarf?user_id=11&user_name=Tim"></iframe>
+<iframe style="display:inline-block;float:left;width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;"
+  src="/commerce/products/scarce-scarf?user_id=12&user_name=Katie"></iframe>
 </div>
 
 <!--
@@ -209,13 +246,13 @@ So what does a better solution look like?
 
 ---
 
-# One potential solution
+## One potential solution
 
 <div style="display: flex; gap: 1rem;">
-<iframe style="width:45%; height:30rem;"
-  src="/commerce/better_products/rare-raincoat?user_id=110&user_name=Parker" frameBorder="1"></iframe>
-<iframe style="width:45%; height:30rem;"
-  src="/commerce/better_products/rare-raincoat?user_id=120&user_name=Andrew" frameBorder="1"></iframe>
+<iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;"
+  src="/commerce/better_products/rare-raincoat?user_id=110&user_name=Parker"></iframe>
+<iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;"
+  src="/commerce/better_products/rare-raincoat?user_id=120&user_name=Andrew"></iframe>
 </div>
 
 <!-- Tim
@@ -248,10 +285,10 @@ But, let's take a look first:
  -->
 
 ---
-# Example -
+## Example -
 
 <div style="display: flex; gap: 1rem;">
-  <iframe style="display:inline-block;float:left;width:45%; height:30rem;" src="/social/posts" frameBorder="1"></iframe>
+  <iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/posts"></iframe>
 </div>
 
 ---
@@ -263,7 +300,7 @@ So, that seems pretty obvious, right? In this example, if you decide to just dis
 
 
 ---
-# One potential solution
+## One potential solution
 Tim - Shows a counter of new messages with the option to display them
 
 ---
