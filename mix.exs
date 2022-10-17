@@ -40,6 +40,7 @@ defmodule Realtime.MixProject do
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.18"},
+      {:faker, "~> 0.17"},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_copy, "~> 0.1.1"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},

@@ -249,7 +249,10 @@ But, let's take a look first:
 
 ---
 # Example -
-Tim - Social media/twitter feed that is moving too fast?
+
+<div style="display: flex; gap: 1rem;">
+  <iframe style="display:inline-block;float:left;width:45%; height:30rem;" src="/social/posts" frameBorder="1"></iframe>
+</div>
 
 ---
 # What are the problems here?

@@ -1,0 +1,9 @@
+<h2 phx-click="Hi">Posts!</h2>
+<div>
+  <%= for post <- @posts do %>
+    <div>
+      <span><%= post.author %></span>
+      <span><%= post.content %></span>
+    </div>
+  <% end %>
+</div>

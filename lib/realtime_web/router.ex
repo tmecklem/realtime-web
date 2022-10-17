@@ -22,6 +22,12 @@ defmodule RealtimeWeb.Router do
     live "/better_checkout", BetterCheckoutLive.Show, :show
   end
 
+  scope "/social", RealtimeWeb do
+    pipe_through :browser
+
+    live "/posts", PostLive.Index, :index
+  end
+
   scope "/", RealtimeWeb do
     pipe_through :browser
 

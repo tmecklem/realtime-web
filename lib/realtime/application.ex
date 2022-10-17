@@ -11,22 +11,21 @@ defmodule Realtime.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
+      # Phoenix/Ecto
       Realtime.Repo,
-      # Start the Telemetry supervisor
-      RealtimeWeb.Telemetry,
-      # Start the PubSub system
       {Phoenix.PubSub, name: Realtime.PubSub},
-      # Start the Endpoint (http/https)
       RealtimeWeb.Endpoint,
-      # Start a worker by calling: Realtime.Worker.start_link(arg)
-      # {Realtime.Worker, arg}
 
+      # Commerce
       {Registry, keys: :unique, name: Registry.ProductStockRegistry},
       {Registry, keys: :unique, name: Registry.CartRegistry},
       {Registry, keys: :duplicate, name: Realtime.Commerce.InventoryEvents},
       {Registry, keys: :duplicate, name: Realtime.Commerce.CartEvents},
-      {DynamicSupervisor, name: Realtime.CartSupervisor}
+      {DynamicSupervisor, name: Realtime.CartSupervisor},
+
+      # Social
+      Realtime.Social.PostGenerator,
+      {Registry, keys: :duplicate, name: Realtime.Social.PostEvents}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -34,7 +33,7 @@ defmodule Realtime.Application do
     opts = [strategy: :one_for_one, name: Realtime.Supervisor]
 
     Supervisor.start_link(children, opts)
-    |> tap(fn _ -> initialize_products() end)
+    |> tap(fn {:ok, _} -> initialize_products() end)
   end
 
   # Tell Phoenix to update the endpoint configuration
