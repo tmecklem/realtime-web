@@ -53,7 +53,7 @@ defmodule Realtime.BetterCommerce do
     |> Enum.any?(fn product -> product.sku == sku end)
   end
 
-  def checkout(user, products) do
+  def checkout(user, _products) do
     Cart.clear_cart(user)
   end
 end

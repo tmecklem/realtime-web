@@ -6,7 +6,7 @@ Welcome, <%= @user.name %>
 <ul>
   <%= for item <- @items do %>
     <li>
-      <%= live_patch item.name, to: Routes.product_show_path(@socket, :show, item.sku, user_id: @user.id, user_name: @user.name) %>
+      <%= live_patch item.name, to: Routes.better_product_show_path(@socket, :show, item.sku, user_id: @user.id, user_name: @user.name) %>
       <button phx-click="remove_from_cart" phx-value-sku={item.sku}>Remove</button>
     </li>
   <% end %>
