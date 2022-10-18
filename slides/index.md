@@ -291,6 +291,8 @@ But, let's take a look first:
 ---
 ## Example -
 
+<iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/rate_intensity"></iframe>
+
 <div style="display: flex; gap: 1rem;">
   <iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/posts"></iframe>
 </div>
@@ -319,6 +321,8 @@ So, that seems pretty obvious, right? In this example, if you decide to just dis
 
 ---
 ## One potential solution
+
+<iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/rate_intensity"></iframe>
 
 <div style="display: flex; gap: 1rem;">
   <iframe style="display:inline-block;float:left;width:45%; height:30rem;" src="/social/posts" frameBorder="1"></iframe>

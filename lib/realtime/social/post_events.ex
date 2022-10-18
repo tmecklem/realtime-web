@@ -1,5 +1,5 @@
 defmodule Realtime.Social.PostEvents do
-  def listen_for_events(event_type) when event_type in [:post_created] do
+  def listen_for_events(event_type) when event_type in [:post_created, :rate_changed] do
     Registry.register(__MODULE__, event_type, [])
   end
 

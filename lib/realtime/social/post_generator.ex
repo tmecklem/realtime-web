@@ -7,7 +7,8 @@ defmodule Realtime.Social.PostGenerator do
   alias Faker.Internet
   alias Faker.Lorem.Shakespeare
 
-  @wait_time 800
+  @default_rate 3
+  @wait_times [5000, 4000, 3000, 2000, 1000, 750, 500, 400, 300, 200, 10]
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
@@ -15,11 +16,17 @@ defmodule Realtime.Social.PostGenerator do
 
   @impl GenServer
   def init(_opts) do
-    :timer.send_after(@wait_time, :post)
-    {:ok, %{wait_time: @wait_time, posts: []}}
+    :timer.send_after(Enum.at(@wait_times, @default_rate), :post)
+    {:ok, %{rate: @default_rate, posts: []}}
   end
 
   def list_posts, do: GenServer.call(__MODULE__, :list_posts)
+
+  def change_rate(new_rate) when new_rate <= 11 and new_rate >= 0 do
+    GenServer.call(__MODULE__, {:change_rate, new_rate})
+  end
+
+  def get_rate, do: GenServer.call(__MODULE__, :get_rate)
 
   @impl GenServer
   def handle_call(:list_posts, _sender, %{posts: posts} = state) do
@@ -27,7 +34,18 @@ defmodule Realtime.Social.PostGenerator do
   end
 
   @impl GenServer
-  def handle_info(:post, %{wait_time: wait_time, posts: posts} = state) do
+  def handle_call({:change_rate, new_rate}, _sender, state) do
+    PostEvents.notify(:rate_changed, new_rate)
+    {:reply, :ok, %{state | rate: new_rate}}
+  end
+
+  @impl GenServer
+  def handle_call(:get_rate, _sender, %{rate: rate} = state) do
+    {:reply, rate, state}
+  end
+
+  @impl GenServer
+  def handle_info(:post, %{rate: rate, posts: posts} = state) do
     post =
       Post.new(%{
         content: get_random_content(),
@@ -38,12 +56,13 @@ defmodule Realtime.Social.PostGenerator do
       })
 
     PostEvents.notify(:post_created, post)
-    :timer.send_after(random_interval(wait_time), :post)
+    :timer.send_after(random_interval(rate), :post)
 
     {:noreply, %{state | posts: Enum.take([post | posts], 100)}}
   end
 
-  defp random_interval(wait_time) do
+  defp random_interval(rate) do
+    wait_time = Enum.at(@wait_times, rate - 1)
     wait_time + max(trunc(wait_time * (Enum.random(-100..200) / 100.0)), 0)
   end
 

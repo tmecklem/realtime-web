@@ -29,6 +29,8 @@ defmodule RealtimeWeb.Router do
 
     live "/posts", PostLive.Index, :index
     live "/better_posts", BetterPostLive.Index, :index
+
+    live "/rate_intensity", RateIntensityLive.Index, :index
   end
 
   scope "/", RealtimeWeb do

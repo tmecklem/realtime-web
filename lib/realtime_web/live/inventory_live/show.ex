@@ -10,7 +10,7 @@ defmodule RealtimeWeb.InventoryLive.Show do
     {:ok, socket}
   end
 
-  @impl
+  @impl true
   def render(assigns) do
     ~H"""
     Stock Level: <%= @product.stock_level %>
