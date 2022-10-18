@@ -20,6 +20,8 @@ defmodule RealtimeWeb.Router do
     live "/better_products/:id", BetterProductLive.Show, :show
     live "/better_cart", BetterCartLive.Show, :show
     live "/better_checkout", BetterCheckoutLive.Show, :show
+
+    live "/inventory/:id", InventoryLive.Show, :show
   end
 
   scope "/social", RealtimeWeb do

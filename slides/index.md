@@ -199,6 +199,8 @@ So let's take a look at what that may look like.
 
 ## Example - low inventory on a commerce page
 
+<iframe style="width:45%; height:3rem; border: 3px solid lightgray; border-radius: 10px;" src="/commerce/inventory/scarce-scarf"></iframe>
+
 <div style="display: flex; gap: 1rem;">
 <iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;"
   src="/commerce/products/scarce-scarf?user_id=11&user_name=Tim"></iframe>
@@ -247,6 +249,8 @@ So what does a better solution look like?
 ---
 
 ## One potential solution
+
+<iframe style="width:45%; height:3rem; border: 3px solid lightgray; border-radius: 10px;" src="/commerce/inventory/rare-raincoat"></iframe>
 
 <div style="display: flex; gap: 1rem;">
 <iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;"

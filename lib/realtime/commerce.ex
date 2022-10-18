@@ -5,6 +5,7 @@ defmodule Realtime.Commerce do
 
   alias Realtime.Commerce.ProductInventory
   alias Realtime.Commerce.Cart
+  alias Realtime.Commerce.Product
 
   @doc """
   Gets a single product.
@@ -48,5 +49,13 @@ defmodule Realtime.Commerce do
     else
       {:error, "Oh no! We're out of product and can't complete your order!"}
     end
+  end
+
+  def increment_inventory(product = %Product{}) do
+    ProductInventory.increment(product.sku)
+  end
+
+  def decrement_inventory(product = %Product{}) do
+    ProductInventory.decrement(product.sku)
   end
 end

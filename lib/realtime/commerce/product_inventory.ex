@@ -22,6 +22,8 @@ defmodule Realtime.Commerce.ProductInventory do
   def stock_level(sku), do: GenServer.call(via_tuple(sku), :stock_level)
   def claim_product(sku), do: GenServer.call(via_tuple(sku), :claim_product)
   def unclaim_product(sku), do: GenServer.call(via_tuple(sku), :unclaim_product)
+  def increment(sku), do: GenServer.call(via_tuple(sku), :increment)
+  def decrement(sku), do: GenServer.call(via_tuple(sku), :decrement)
 
   @impl GenServer
   def handle_call(:product, _from, %{product: %Product{} = product} = state) do
@@ -61,6 +63,24 @@ defmodule Realtime.Commerce.ProductInventory do
     InventoryEvents.notify(sku, :inventory_changed, updated_product)
 
     {:reply, true, %{state | product: updated_product}}
+  end
+
+  @impl GenServer
+  def handle_call(:increment, _from, %{product: %Product{sku: sku, stock_level: stock_level} = product} = state) do
+    updated_product = %{product | stock_level: stock_level + 1}
+
+    InventoryEvents.notify(sku, :inventory_changed, updated_product)
+
+    {:reply, {:ok, updated_product}, %{state | product: updated_product}}
+  end
+
+  @impl GenServer
+  def handle_call(:decrement, _from, %{product: %Product{sku: sku, stock_level: stock_level} = product} = state) do
+    updated_product = %{product | stock_level: max(stock_level - 1, 0)}
+
+    InventoryEvents.notify(sku, :inventory_changed, updated_product)
+
+    {:reply, {:ok, updated_product}, %{state | product: updated_product}}
   end
 
   defp via_tuple(sku) do
