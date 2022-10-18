@@ -291,10 +291,24 @@ But, let's take a look first:
   <iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/posts"></iframe>
 </div>
 
+<!-- 
+(Tim)
+
+_Start out slowly with the data rate_
+
+Here we've got a social feed coming in from friends all over the world. We've got a user, post content, location, and relevancy score along with it that our friends in the data science department have associated with the post's relevancy to the user's ever-changing interests. 
+
+When the activity rate is low, say one every few seconds, a user could consume that for a while and feel connected with their friends. Real-time is better in this case, keeping the user from having to reload the page constantly to get the latest information. It's like auto doom-scroll and who doesn't want that?!
+
+But what happens when the information comes in a little faster, say our user has lots of active friends? It's not long before the system stops being useful and starts getting in the way. This is actually worse than a statically rendered page, because at least you can read that right?
+
+-->
+
 ---
 # What are the problems here?
 
 <!--
+
 So, that seems pretty obvious, right? In this example, if you decide to just display everything as it comes in, you have to think about how that may work when the influx of data varies. What happens when the data comes in at a slower pace? At a higher pace? Or at a an insanely high pace? There is a threshold where this solution of "just show it to the user" doesn't work. And we have to make sure we identify it and address it. So, how do we do this better?
  -->
 
@@ -306,6 +320,22 @@ So, that seems pretty obvious, right? In this example, if you decide to just dis
   <iframe style="display:inline-block;float:left;width:45%; height:30rem;" src="/social/posts" frameBorder="1"></iframe>
   <iframe style="display:inline-block;float:left;width:45%; height:30rem;" src="/social/better_posts" frameBorder="1"></iframe>
 </div>
+
+<!--
+(Tim)
+
+I'll share a little secret with you. We shopped this problem around internally, and we struggled to find a really great catchall solution. Think about how Facebook solves this problem. They curate the list, dropping things that they find less relevant or likely to keep those engagement metrics high. Twitter lets you scratch that chronoligcal completionist itch, but if you have more than a hundred active friends, you have to set aside time on your calendar to "engage" with them. You've got a couple of options, and one of the better ones is to use metadata to guide what to show and what to hide.
+
+If you're not familiar with that term, metadata is information about the content in this case. So, you could use a location filter to only show posts from a certain region of the world. Or you could filter based on friend groups, like Instagram's "close friends" or Twitter lists. In our case, we chose to do two things as examples.
+
+First, we pause the feed if it exceeds more than a post eveery 4-5 seconds. This lets you catch up your reading and choose to load the rest. There are plently of clever ways to do this, including infinite scrolling and paging. Our solution is conference talk simple. We just queue up the unshown posts and load them when the user clicks the View more link.
+
+The second thing that we did was put some of the filtering control in the user's hands. We allow the user to filter out enything that has lower than a 90% relevancy score.
+
+_Increase rate slider until it's moving too fast even for the relevancy filter_
+
+As you can see, everything has limits, including our solution. Data firehose problems present an especially hard balance to strike to find what the user really needs to be able to do.
+-->
 
 ---
 ### Why is this better?
@@ -327,30 +357,60 @@ We've been talking a lot about how to best display data in realtime, and it's be
 
 ---
 # Tie all together with the backend stuff
-Tim
+
+<!--
+  (Tim)
+  
+It's fun to present live demo kind of stuff like this in slides. You get a sense for how powerful real-time apps can be in a simple screen. In fact, you might be inclined to think that maybe we faked the backend and just wrote all of this in client-side javascript for the sake of the presentation. But the truth is that these examples are frames in the slides that are talking to a real backend server, pushing events through a websocket, mimicking separate http sessions, calling business logic actions on the backend, and triggering push events back to the client.
+  
+Perhaps more interesting is that there isn't a single line of javascript that we wrote to support any of this. The only js you'll find in the repo was the boilerplate websocket code generated on project create. The reason I bring this up is that the framework choice really matters for building realtime user experiences. If you select a web stack that not only allows you to build a strongly cohesive, loosely coupled system but also supports ongoing event driven "conversations" with your users as a first class feature form the backend all the way to the browser, you don't have to spend all of your time building new API endpoints and coordinating event handoffs from frontend to backend and back again.
+
+In our case, we chose Phoenix and LiveView for this demo. Because of the ability of Elixir and Erlang applications to host thousands or even millions of lightweight processes that each can pass messages to each other and each represent a small piece of running state that keeps the conversation going between a user and the information, there's incredible power that we get from the language and tools... batteries included for very little development effort. There are other technologies that will let you accomplish this feat as well. Some examples are Rails with Hotwire, Laravel with livewire, next.js with server side render React, .NET with Blazor. The list is growing rapidly, and you may notice that it does _not_ look like Rails, GraphQL and React, or .NET, json-api and Vue. Because much of the power of these systems is in the removal of separation between the backend and frontend. LiveView uses a single templating language to render a full page on load and then connects automatically via websocket to being the conversation, using the same templates to re-render based on events from the server or from the client as needed with almost no waste over the websocket wire. If you haven't seen these technologies in action, they border on the line of magic for how much ceremony, duplication, and boilerplate that they remove.
+
+Okay, I'll end my little love note here and get back on track.
+
+Can you build a realtime app with separate front and backend technologies that are overwhelmingly used and adopted? Yes, of course, and to great success. Is my favorite technology the right choice for every problem at every scale? Of course not. But I'm fully convinced after working with enterprise stacks and frontend stacks and pancake stacks that choosing a "conversation capable" solution that combines traditional requests and responses with event-driven websockets seamlessly is a force multiplier like we haven't seen since the web community "discovered" asynchronous calls with XMLHTTPRequest more than a decade ago.
+
+If Conway's Law is real, that we design systems that mirror our organization's communication structure... then I think that also implies that we should be looking closely at any technology that allows us to break down the often-artifical separation between frontend and backend technologies and allows frontend and backend devs and designers to work on a single cohesive system while retaining the loose coupling that supports multi-disciplinary teams to be productive together.
+
+-->
 
 ---
 ### Something to keep in mind
 # Disconnections and partial realtime
-Tim
 
-<!-- If you decide to tackle this, there will be a transition period where you have some 'dead' views and some realtime views—make it obvious which is which. Talk about Github page-->
+<!-- 
+
+(Tim)
+
+Okay, let's get hypothetical for a second. You have a statically rendered application, fully HTTP browser request response stuff. You want to transition it to a real-time experience, supporting your user's decision-making needs with event-driven backends and without full page re-renders everywhere. There's a pitfall to be aware of.
+
+Let's call this the "Realtime uncanny valley". At some point, without careful planning you will have a app-in-transition, that sometimes feels real-time and sometimes doesn't. This can be confusing for a user. For example, how many of you have encountered this page?
+-->
 
 ---
 
 ![](images/github-new-project.png)
 
 <!--
-
 (Tim)
 
-How many of you have made a shiny new project, created a repository for it on GitHub, pushed your code, and then stared blankly at this screen waiting for it to pick up your amazing code only to realize that unlike the rest of GitHub, this page does is not driven by the `git push` command you just ran. Maybe this one's just me, and I'll take an L on that one if so :D.
+Now I don't claim to be the smartest person on the planet, but wow if I haven't spent more time than I'd like to admit just starting at the screen waiting for it to do something. Can I get a quick show of hands for anyone else who knows where I'm going with this?
 
-How about one final developer-centric one. How many of you have used a tool that has a hot-reload feature that supposed to update the browser when you save a file, only it's a Monday and for some reason the file watcher seems to be taking the day off?
+You create a shiny new repository, and you craft a beautiful first commit message. You dutifully follow the instructions on the screen and you push that perfect commit up to the repo and then... you wait.
+
+Why do you wait? If all of GitHub was static pages, you'd know to click the refresh button. But almost all of GitHub is real-time! You submit a PR and _stuff happens_. People comment, CI builds update colors telling you how well your code performed with tests. It's lively, it's dynamic! But not this screen.
+
+It's the uncanny valley. Everything else convinces you that you've got a realtime experience, and then you encounter this non-player character that's staring past you and doing a forward moonwalk into a wall.
+
+How about a similar developer-centric example? When you have a hot-reload web stack that re-renders the page every time you save a relevant file. Except that sometimes, usually on Mondays, it doesn't work. What do you do? If you're like me, you resort to methodically reloading the page to make sure it picked up your changes.
+
+Here's the danger of being in the realtime uncanny valley for too long. It erodes the user's confidence that your app is giving them the information they need when they need it. Losing confidence means loss of trust. Between mashes of the refresh button, your user may begin to question the whole experience. In the worst case, (one that I experience in a particular app that I use at least once a week for instance), I have very low trust and I spend a lot of time making sure that the data I'm putting in and getting out is what I need it to be. I'm close to a 3 on the net promoter score for this app, and the primary reason is the lack of trust in the realtime experience that they are trying to deliver. It would be better to embrace a statically rendered site than to hang out indefinitely in the realtime uncanny valley. Keep that in mind as you _hypothetically_ plan a journey like this.
 
 -->
 
 ---
+
 <!--
 _class: 'closing'
 _footer: '![image](images/launchscout-logo_inverse.png)'
@@ -360,16 +420,3 @@ _color: white
 # Questions?
 ### launchscout.com
 
-
-
----
-
-Tell me if you can relate to any of these problems.
-
-<!--
-
-How many of you have been in the middle of reading a post or an article on the internet in a feed and had some late breaking new information come in and push down the content you were reading?
-
-You're on an ecommerce site, you find an item that you want to buy that's in high demand, and in between the time you add it to your cart and go to checkout, the item has gone out of stock.
-
--->
