@@ -23,16 +23,18 @@ li.show {
 }
 </style>
 
-<%= if length(@queued_posts) > 0 do %>
-  <div><a phx-click="refresh_posts">View <%= length(@queued_posts) %> newer posts</a></div>
-<% end %>
+<div>
+  <input type="checkbox" phx-click="toggle_relevancy" checked={@high_relevancy} />Show only high relevancy
+  <%= if length(@queued_posts) > 0 do %>
+    <a phx-click="refresh_posts">View newer posts</a>
+  <% end %>
+</div>
 <ul style="list-style-type: none;">
-  <%= for post <- @posts do %>
+  <%= for post <- @display_posts do %>
     <li class="">
-      <b style="font-size: 12px;"><%= post.author %></b>
+      <b style="font-size: 12px;"><%= post.author %></b> <span style="font-size: 12px;" ><%= post.relevance %>%</span>
       <p>
         <%= post.content %>
-
         <span><%= elem(post.location, 2) %>, <%= elem(post.location, 3) %></span>
       </p>
     </li>

@@ -26,7 +26,7 @@ li.show {
 <ul style="list-style-type: none;">
   <%= for post <- @posts do %>
     <li class="">
-      <b style="font-size: 12px;"><%= post.author %></b>
+      <b style="font-size: 12px;"><%= post.author %></b> <span style="font-size: 12px;" ><%= post.relevance %>%</span>
       <p>
         <%= post.content %>
         <span><%= elem(post.location, 2) %>, <%= elem(post.location, 3) %></span>
