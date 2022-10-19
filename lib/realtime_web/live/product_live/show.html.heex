@@ -1,10 +1,33 @@
+<style>
+  button {
+    background-color: #6042BC;
+    border: 0;
+  }
+
+  h1 {
+    margin-top: 15px;
+  }
+
+  h2 {
+  margin-bottom: 0;
+  }
+
+  ul {
+  list-style-type: none;
+  margin-top: 20px;
+  }
+
+</style>
+
 Welcome, <%= @user.name %>
 <span style="float: right;">
   <%= link "View Cart", to: Routes.cart_show_path(@socket, :show, user_id: @user.id, user_name: @user.name) %>
 </span>
 
-<h1><%= @product.name %></h1>
+
+<h1>Products</h1>
+<h2><%= @product.name %></h2>
 <%= @product.stock_level %> in stock
 <p>
-  <button phx-click="add_to_cart" disabled={elem(@button_state, 0)}><%=elem(@button_state, 1)%></button>
+  <button style="margin-top: 20px;" phx-click="add_to_cart" disabled={elem(@button_state, 0)}><%=elem(@button_state, 1)%></button>
 </p>

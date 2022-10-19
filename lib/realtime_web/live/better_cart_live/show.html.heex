@@ -1,13 +1,37 @@
+<style>
+  button {
+    background-color: #6042BC;
+    border: 0;
+  }
+
+  h1 {
+    margin-top: 15px;
+  }
+
+  h2 {
+  margin-bottom: 0;
+  }
+
+  ul {
+  list-style-type: none;
+  margin-top: 20px;
+  }
+
+</style>
+
 Welcome, <%= @user.name %>
+<h1>Cart</h1>
+
+
 <span>
-  <%= if @countdown_time do %><div>You have <%= @countdown_time %> left to checkout</div><% end %>
+  <%= if @countdown_time do %><div style="background-color:#F7A006; padding: 5px 10px; border-radius: 3px; font-size: 12px; display: inline-block;">You have <%= @countdown_time %> left to checkout</div><% end %>
 </span>
 
 <ul>
   <%= for item <- @items do %>
     <li>
       <%= live_patch item.name, to: Routes.better_product_show_path(@socket, :show, item.sku, user_id: @user.id, user_name: @user.name) %>
-      <button phx-click="remove_from_cart" phx-value-sku={item.sku}>Remove</button>
+      <button style="background-color: transparent; color: #F90B66;" phx-click="remove_from_cart" phx-value-sku={item.sku}>Remove</button>
     </li>
   <% end %>
 

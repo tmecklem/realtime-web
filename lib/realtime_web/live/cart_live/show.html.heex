@@ -1,9 +1,32 @@
+<style>
+  button {
+    background-color: #6042BC;
+    border: 0;
+  }
+
+  h1 {
+    margin-top: 15px;
+  }
+
+  h2 {
+  margin-bottom: 0;
+  }
+
+  ul {
+  list-style-type: none;
+  margin-top: 20px;
+  }
+
+</style>
+
 Welcome, <%= @user.name %>
+
+<h1>Cart</h1>
 <ul>
   <%= for item <- @items do %>
     <li>
       <%= live_patch item.name, to: Routes.product_show_path(@socket, :show, item.sku, user_id: @user.id, user_name: @user.name) %>
-      <button phx-click="remove_from_cart" phx-value-sku={item.sku}>Remove</button>
+      <button style="background-color: transparent; color: #F90B66;" phx-click="remove_from_cart" phx-value-sku={item.sku}>X Remove</button>
     </li>
   <% end %>
 

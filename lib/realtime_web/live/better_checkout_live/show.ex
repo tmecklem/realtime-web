@@ -17,8 +17,9 @@ defmodule RealtimeWeb.BetterCheckoutLive.Show do
   @impl true
   def render(assigns) do
     ~H"""
+    <h1>
     Thank you for your business, <%=@user.name%>!
-
+    </h1>
 
     <%= live_patch "Shop more", to: Routes.better_product_show_path(@socket, :show, "rare-raincoat", user_id: @user.id, user_name: @user.name) %>
     """
