@@ -1,41 +1,21 @@
-<style>
-
-li.show {
-  animation: openspace .3s ease forwards,
-  fade-in-animation .3s .3s cubic-bezier(0,.8,.32,1.07) forwards;
-  animation-iteration-count: 1;
-}
-
-@keyframes openspace {
-    to {
-        height: auto;
-    }
-}
-
-@keyframes fade-in-animation {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-</style>
-
-<div>
-  <input type="checkbox" phx-click="toggle_relevancy" checked={@high_relevancy} />Show only high relevancy
+<div style="margin-bottom: 10px; display: flex; align-items:center; justify-content: space-between;">
+  <div style="cursor: pointer;">
+    <input type="checkbox" phx-click="toggle_relevancy" checked={@high_relevancy} />Show only high relevancy
+  </div>
   <%= if length(@queued_posts) > 0 do %>
-    <a phx-click="refresh_posts">View newer posts</a>
+    <a style="font-size: 12px; background-color: white; box-shadow: 0px 5px 10px gray; padding: 2px 10px; border-radius: 20px; color: black; margin-bottom: 5px;" phx-click="refresh_posts">
+    ↑ View newer posts
+    </a>
   <% end %>
 </div>
 <ul style="list-style-type: none;">
   <%= for post <- @display_posts do %>
-    <li class="">
-      <b style="font-size: 12px;"><%= post.author %></b> <span style="font-size: 12px;" ><%= post.relevance %>%</span>
+    <li>
+      <b style="font-size: 12px;"><%= post.author %></b>
+      <span style="font-size: 12px;" ><%= elem(post.location, 2) %>, <%= elem(post.location, 3) %></span>
+      <span style="font-size: 12px; background-color:#9B74E8; color: white; font-weight: bold; padding: 2px 7px; border-radius: 10px;" ><%= post.relevance %>%</span>
       <p>
         <%= post.content %>
-        <span><%= elem(post.location, 2) %>, <%= elem(post.location, 3) %></span>
       </p>
     </li>
   <% end %>
