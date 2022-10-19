@@ -124,23 +124,27 @@ _color: white
 
 <!--
 
-If you look back to pre-web days, many applications were rich client desktop apps that connected to internal servers, or a little further back there were dumb terminals that connected to a mainframe. The apps that ran on these platforms did not have the benefit of running on incredibly fast hardware or utilizing Internet speeds that are 10x of the old internal ethernet networks, but they were often more real-time than the typical web application. The move to web applications and the internet opened up a ton of new possibilities, but it also introduced new constraints, such as the request/response nature of HTTP. We became conditioned to see a snapshot of reality rather than a fluid picture.
+If you look back to pre-web days, many applications were rich client desktop apps that connected to internal servers, or a little further back there were dumb terminals that connected to a mainframe. The apps that ran on these platforms did not have the benefit of running on incredibly fast hardware or utilizing Internet speeds that are 10x of the old internal ethernet networks, but they were often more real-time than the typical web application. The move to web applications and the internet opened up a ton of new possibilities, but it also introduced new constraints, such as the request nature of HTTP and one-and-done rendered pages. We became conditioned to see a snapshot of reality rather than a fluid picture.
 
-But that doesn't mean that information behind the scenes remained static. In fact, nearly every modern web application is built on a mountain of changes that happen constantly. Inventory changes, database records backing tables of paged data shift as timestamps are updated and fields are modified. Fulfillment centers take orders and physically assemble them, changing the status as they go. Forum users post new comments, people add emoji reactions to friend's posts, people simultaneously update the same documents/records, and people engage in and are outbid in web auctions. Some apps handle this rapid change well because the business depends on it. Some ignore it. I'd argue that people's expectations are rising up, and a day is coming when web app developers will no longer be able to present static snapshots of realtime information and expect people to be satisfied.
+But that doesn't mean that information behind the scenes remained static. In fact, nearly every modern web application is built on a mountain of changes that happen constantly. Inventory changes, fulfillment centers take orders and physically assemble them, changing the status as they go. Forum users post new comments, people add emoji reactions to friend's posts. People cllaborate simultaneously on the same documents/records. Some apps handle this rapid change well because the business domain demands it. Some apps have been able to ignore the problem altogether. I'd argue that people's expectations are rising, and a day is coming when web app developers will no longer be able to present static snapshots of realtime information and satisfy users' expectations.
 
-The exciting news is that web technologies have advanced far enough to support seamless realtime interactions, and we've entered a new period that allows us the convenience of writing apps that reflect shift in reality without having to work much harder than we did before the advent of websockets and push notifications.
+The exciting news is that web technologies have advanced far enough to support seamless realtime interactions, and we've entered a new period that allows us the convenience of writing apps that reflect shift in reality with a similar effort to the days before websockets and push notifications.
 
 -->
 
 ---
 
-# But we're just catching up to the <br/>capability of our tools
+# We're just catching up to the <br/>capability of our tools
 
 <!-- Tim  Approx 1 minute -->
 <!--
 Our industry has a good problem. Our languages and frameworks are more capable than they have ever been at giving people up to the second information. Used appropriately, we can use them to help people make better decisions, ease the experience of buying products, and improve interactions with other people. But as a whole, I've observed that teams are struggling in the execution of applying the tech to improve the experience with real-time information.
 
-Sometimes we fail to understand the needs of our users and how to support them. Sometimes our tools are too complicated and new paradigms are needed. And sometimes we're stuck using technologies that are less fit to deliver these rich experiences. Today, we will present some example problem scenarios along with an example solution, and along the way we'll address some basic principles and technologies that support better realtime experiences.
+Sometimes we're stuck using technologies that are less fit to deliver this different paradigm where these rich experiences are first class citizens of the technical architecture. Sometimes we fail to understand the needs of our users and how to support them. 
+
+I think most of our difficulties lie in the paradigm shift. We need new vocabulary for this kind of real-time experience, and today I'll use the phrase "conversation capable" to describe technology that has built-in support for a constant bidirectional conversation between the information and the user.
+
+But languages and frameworks are only a part of building real-time experiences. Other factors are more important, because they should be driving our decisions about technology.
 
 -->
 
@@ -158,7 +162,11 @@ Katie
 
 Hi! My name is Katie Pohlman and I am a Principal UX Designer at Launch Scout. Launch Scout is a custom software development agency based in Cincinnati, OH. And
 
-Tim intro 
+Tim 
+VP of Engineering and Delivery
+Worked in enterprise Java, led native mobile teams, and have fallen in love with small mighty teams solving big problems with innovative technology.
+20 years of experience
+excited to talk about this, because we're on the cusp of something as momentous to the web industry as asynchronous json was more than a decade ago.
 -->
 
 <!--
@@ -177,11 +185,13 @@ So, regardless of your role on your team—designer, frontend developer, or back
 <!-- Tim  approx 3 minutes -->
 <!--
 
-One reasonable question to ask is, "if web technologies were a step backward in building soft realtime apps, why are we using them?" To answer that, let's just spend a second and go back to the fundamentals of what makes the web powerful and the building blocks of our modern tools.
+One reasonable question to ask is, "if web technologies were a step backward in building soft realtime apps, why are we using them?" Let's just spend a second and go back to the fundamentals of what makes the web powerful and the building blocks of our modern tools.
 
-The web as we know it was formed around a request cycle that required the browser to initiate the conversation. Request some information, get a response, render, repeat. We added some powerful things along the way with javascript, XMLHTTPRequest (window.fetch and all the other ways to fetch data asynchronously), and great advancements in CSS and client side frameworks. But the idea of a server pushing data down to the browser based on events triggered by something other than a request is fairly modern. Before websockets, there were tricks like long-polling where a browser opened a request to a server and the server keeps the request open until there's data to send back, hooked up in a loop to keep the conversation bi-directional.
+The web as we know it was formed around a request cycle that required the browser to initiate the conversation. Request some information, render a response, repeat. We added some powerful things along the way with javascript, XMLHTTPRequest (window.fetch and all the other ways to fetch data asynchronously), and great advancements in CSS and client side frameworks. The web is powerful because we can build massive and ubiquitous applications without managing independent installs or individually installed databases. 
 
-But in the earlier days, say back in the earlier 2000s, it was common to build the entire system around the request cycle and snapshots of reality. We relied so much on these crisply rendered one-off pages that we built entire tooling ecosystems on this model that break down when the reality of constant change is introduced. Just look at paging for example. Most paging is still based around a query that utilizes a page size and offset. But when new records come in that interleave the existing records, the illusion of a snapshot of the paged data breaks down. Some records repeat across pages. Some data disappears because the offset shifted. We don't have time to dive into paging specifically today, and it's just one of the industry's "solved" problems that becomes unsolved when taking an app realtime.
+But the idea of a server pushing data down to the browser based on events triggered by something other than a request is fairly modern for the web. Before websockets, there were tricks like long-polling where a browser opened a request to a server and the server keeps the request open until there's data to send back, hooked up in a loop to keep the conversation bi-directional.
+
+But in the earlier days, say back in the earlier 2000s, it was common to build the entire system around the request cycle and snapshots of reality. We relied so much on these crisply rendered one-off pages that we built entire tooling ecosystems on this model that break down when the reality of constant change is introduced. Just look at data paging for example. Most paging is still based around a query that utilizes a page size and offset. But when new records come in that interleave the existing records, the illusion of a snapshot of the paged data breaks down. Some records repeat across pages. Some data disappears because the offset shifted. We don't have time to dive into paging specifically today, and it's just one of the industry's "solved" problems that becomes unsolved when taking an app realtime.
 
 So you've probably picked up that talk is a little bit tactical and little bit strategic.
 
@@ -227,7 +237,7 @@ So let's take a look at what that may look like.
 <!--
 Tim
 
-Perhaps this is a good time to let you know that we're going to demonstrate the problems and solutions using an actual running webapp embedded in the slides. We spent quite a bit of time bending the markdown slide tool and the web app to our collective will, but there's always a risk that we messed up the tribute to the demo gods this morning. If that happens, things just get a little more... entertaining.
+For this presentation, we've embedded some actual full stack apps to demostrate problems and potential solutions rather than screenshots or peeling away to a separate window. We're using state of the art iframes here, people, so if something goes wrong we'll adjust and keep going. I think we're all paid up to the demo gods.
 
 T**Talk through the scenario of two people visiting the same product pages in different sessions**
 1) Add the product to cart A
@@ -246,7 +256,13 @@ Note that there's actually a worse scenario where both succeed but there's only 
 <!--
 Tim
 
-Ok so let's talk problems. You probably see the most obvious ones. There's a frustrated customer who won't be getting an item. There may be a fulfillment center customer service rep that has to call a customer to let them know that they in fact will not be receiving the order they placed (or sometimes an unceremonious email canceling the order). We've left a user at a UX dead end cart. They can't place the order for the thing in their cart, and we've given them an error that is technically accurate but they have no easy recourse. They can't do anything useful with the information except make a big ole pot of stew.
+Ok so let's talk problems. You probably see the most obvious ones. 
+* We're soft-committing inventory that we don't have. 
+* If we don't catch it here, the customer service department has to send a difficult email that we've missed the customer's expectations and have to cancel and potentially refund the order
+* The user is at a UX dead end.
+
+Not great!
+
 -->
 
 <!--
