@@ -1,12 +1,8 @@
-INTROS:
 
-Katie
-
-Hi! My name is Katie Pohlman and I am a Principal UX Designer at Launch Scout. Launch Scout is a custom software development agency based in Cincinnati, OH. And
 
 ---
 
-Tim
+Tim - Approx 2 minutes
 
 If you look back to pre-web days, many applications were rich client desktop apps that connected to internal servers, or a little further back there were dumb terminals that connected to a mainframe. The apps that ran on these platforms did not have the benefit of running on incredibly fast hardware or utilizing Internet speeds that are 10x of the old internal ethernet networks, but they were often more real-time than the typical web application. The move to web applications and the internet opened up a ton of new possibilities, but it also introduced new constraints, such as the request/response nature of HTTP. We became conditioned to see a snapshot of reality rather than a fluid picture.
 
@@ -16,13 +12,23 @@ The exciting news is that web technologies have advanced far enough to support s
 
 ---
 
-Tim
+Tim  Approx 1 minute
 
-Our industry has a good problem. Our languages, frameworks and tooling are more capable than they have ever been at giving people up to the second information. Used appropriately, we can use them to help people make better decisions, ease the experience of buying products, and improve interactions with other people. But as a whole, we've observed that teams are struggling in the execution of applying the former to improve the latter.
+Our industry has a good problem. Our languages and frameworks are more capable than they have ever been at giving people up to the second information. Used appropriately, we can use them to help people make better decisions, ease the experience of buying products, and improve interactions with other people. But as a whole, I've observed that teams are struggling in the execution of applying the tech to improve the experience with real-time information.
 
-Sometimes we fail to understand the needs of our users and how to support them. Sometimes our tools are too complicated and new paradigms are needed. And sometimes we're stuck using older technologies that make it unnecessarily hard to deliver these rich experiences. Today, we will present some example problem scenarios along with an example solution, and along the way we'll address some basic principles and technologies that support better realtime experiences.
+Sometimes we fail to understand the needs of our users and how to support them. Sometimes our tools are too complicated and new paradigms are needed. And sometimes we're stuck using technologies that are less fit to deliver these rich experiences. Today, we will present some example problem scenarios along with an example solution, and along the way we'll address some basic principles and technologies that support better realtime experiences.
 
 ---
+
+INTROS:
+
+Segue into the takeaway and intros
+
+Katie
+
+Hi! My name is Katie Pohlman and I am a Principal UX Designer at Launch Scout. Launch Scout is a custom software development agency based in Cincinnati, OH. And
+
+Tim intro
 
 (Katie)
 Before we dig in, though, there is something that I want to call attention to. As a designer, I know that when we're talking about delivering information in real-time in a way that provides value to our users—what information to expose to them, how frequently, when should we surface it, etc—it's easy to assign that responsibility to the UI/UX designers and move on. You know, it's the designers' responsibility to research, learn, and decide what the app should do and how it should look and how it should flow. But, if there's only one thing you take away from this talk, let it be this: Building modern, trustworthy realtime web applications is not just a design concern. **[repeat that].** It's not even just a front-end concern. It's a full stack, end-to-end concern—and everyone on the team should take ownership and responsibility for it.
@@ -31,13 +37,15 @@ So, regardless of your role on your team—designer, frontend developer, or back
 
 ---
 
-Tim
+Tim  approx 3 minutes
 
-The web as we know it was formed around a request/response HTTP cycle that required the browser to initiate the conversation. Request some information, get a response, render, repeat. We added some powerful things along the way with javascript, XMLHTTPRequest (window.fetch and all the other ways to fetch data asynchronously), and great advancements in CSS and client side frameworks. But the idea of a server pushing data down to the browser based on events triggered by something other than a request is fairly modern. Before websockets, there were tricks like long-polling where a browser opened a request to a server and the server keeps the request open until there's data to send back, hooked up in a loop to keep the conversation bi-directional.
+One reasonable question to ask is, "if web technologies were a step backward in building soft realtime apps, why are we using them?" To answer that, let's just spend a second and go back to the fundamentals of what makes the web powerful and the building blocks of our modern tools.
 
-But in the earlier days, say back in the earlier 2000s, it was common to build the entire system around the request cycle and snapshots. We relied so much on these crisply rendered one-off pages that we built entire models on them that break down when the reality of constant change is introduced. Just look at paging for example. Most paging is still based around a query that utilizes a page size and offset. But when new records come in that interleave the existing records, the illusion of a snapshot of the paged data breaks down. Some records repeat across pages. Some data disappears because the offset shifted. I won't specifically discuss the solution to stale paging in this talk, but if you are struggling with that problem come talk and I'll give you a couple of good options to try.
+The web as we know it was formed around a request cycle that required the browser to initiate the conversation. Request some information, get a response, render, repeat. We added some powerful things along the way with javascript, XMLHTTPRequest (window.fetch and all the other ways to fetch data asynchronously), and great advancements in CSS and client side frameworks. But the idea of a server pushing data down to the browser based on events triggered by something other than a request is fairly modern. Before websockets, there were tricks like long-polling where a browser opened a request to a server and the server keeps the request open until there's data to send back, hooked up in a loop to keep the conversation bi-directional.
 
-So this talk is a little bit tactical and little bit strategic. It's built on pragmatism with a little philosophy baked in.
+But in the earlier days, say back in the earlier 2000s, it was common to build the entire system around the request cycle and snapshots of reality. We relied so much on these crisply rendered one-off pages that we built entire tooling ecosystems on this model that break down when the reality of constant change is introduced. Just look at paging for example. Most paging is still based around a query that utilizes a page size and offset. But when new records come in that interleave the existing records, the illusion of a snapshot of the paged data breaks down. Some records repeat across pages. Some data disappears because the offset shifted. We don't have time to dive into paging specifically today, and it's just one of the industry's "solved" problems that becomes unsolved when taking an app realtime.
+
+So you've probably picked up that talk is a little bit tactical and little bit strategic.
 
 With that in mind, let's talk about the principles through some common problems for realtime apps.
 
@@ -48,6 +56,14 @@ With that in mind, let's talk about the principles through some common problems 
 The first problem we want to highlight today is the problem of scarce resources. And this problem is probably most commonly seen in systems that handle inventory management, and an example of how that manifests itself is out of stock situations on ecommerce sites. So, let's look at ecommerce specifically. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event. And it is our job as designers and developers to make sure customers have the right information about an item at the right time to make informed decisions about that buying process. So, what state or status is the item in? Is it available for pre-order, is it available to purchase, is it out of stock? All of these things and more are questions that a customer has during the buying process.
 
 So let's take a look at what that may look like.
+
+---
+
+
+
+---
+
+
 
 ---
 
@@ -107,7 +123,7 @@ But, let's take a look first:
 
 _Start out slowly with the data rate_
 
-Here we've got a social feed coming in from friends all over the world. We've got a user, post content, location, and relevancy score along with it that our friends in the data science department have associated with the post's relevancy to the user's ever-changing interests. 
+Here we've got a social feed coming in from friends all over the world. We've got a user, post content, location, and relevancy score along with it that our friends in the data science department have associated with the post's relevancy to the user's ever-changing interests.
 
 When the activity rate is low, say one every few seconds, a user could consume that for a while and feel connected with their friends. Real-time is better in this case, keeping the user from having to reload the page constantly to get the latest information. It's like auto doom-scroll and who doesn't want that?!
 
@@ -150,9 +166,9 @@ We've been talking a lot about how to best display data in realtime, and it's be
 ---
 
 (Tim)
-  
+
 It's fun to present live demo kind of stuff like this in slides. You get a sense for how powerful real-time apps can be in a simple screen. In fact, you might be inclined to think that maybe we faked the backend and just wrote all of this in client-side javascript for the sake of the presentation. But the truth is that these examples are frames in the slides that are talking to a real backend server, pushing events through a websocket, mimicking separate http sessions, calling business logic actions on the backend, and triggering push events back to the client.
-  
+
 Perhaps more interesting is that there isn't a single line of javascript that we wrote to support any of this. The only js you'll find in the repo was the boilerplate websocket code generated on project create. The reason I bring this up is that the framework choice really matters for building realtime user experiences. If you select a web stack that not only allows you to build a strongly cohesive, loosely coupled system but also supports ongoing event driven "conversations" with your users as a first class feature form the backend all the way to the browser, you don't have to spend all of your time building new API endpoints and coordinating event handoffs from frontend to backend and back again.
 
 In our case, we chose Phoenix and LiveView for this demo. Because of the ability of Elixir and Erlang applications to host thousands or even millions of lightweight processes that each can pass messages to each other and each represent a small piece of running state that keeps the conversation going between a user and the information, there's incredible power that we get from the language and tools... batteries included for very little development effort. There are other technologies that will let you accomplish this feat as well. Some examples are Rails with Hotwire, Laravel with livewire, next.js with server side render React, .NET with Blazor. The list is growing rapidly, and you may notice that it does _not_ look like Rails, GraphQL and React, or .NET, json-api and Vue. Because much of the power of these systems is in the removal of separation between the backend and frontend. LiveView uses a single templating language to render a full page on load and then connects automatically via websocket to being the conversation, using the same templates to re-render based on events from the server or from the client as needed with almost no waste over the websocket wire. If you haven't seen these technologies in action, they border on the line of magic for how much ceremony, duplication, and boilerplate that they remove.
