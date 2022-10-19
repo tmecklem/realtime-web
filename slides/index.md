@@ -140,7 +140,7 @@ The exciting news is that web technologies have advanced far enough to support s
 <!--
 Our industry has a good problem. Our languages and frameworks are more capable than they have ever been at giving people up to the second information. Used appropriately, we can use them to help people make better decisions, ease the experience of buying products, and improve interactions with other people. But as a whole, I've observed that teams are struggling in the execution of applying the tech to improve the experience with real-time information.
 
-Sometimes we're stuck using technologies that are less fit to deliver this different paradigm where these rich experiences are first class citizens of the technical architecture. Sometimes we fail to understand the needs of our users and how to support them. 
+Sometimes we're stuck using technologies that are less fit to deliver this different paradigm where these rich experiences are first class citizens of the technical architecture. Sometimes we fail to understand the needs of our users and how to support them.
 
 I think most of our difficulties lie in the paradigm shift. We need new vocabulary for this kind of real-time experience, and today I'll use the phrase "conversation capable" to describe technology that has built-in support for a constant bidirectional conversation between the information and the user.
 
@@ -162,7 +162,7 @@ Katie
 
 Hi! My name is Katie Pohlman and I am a Principal UX Designer at Launch Scout. Launch Scout is a custom software development agency based in Cincinnati, OH. And
 
-Tim 
+Tim
 VP of Engineering and Delivery
 Worked in enterprise Java, led native mobile teams, and have fallen in love with small mighty teams solving big problems with innovative technology.
 20 years of experience
@@ -187,7 +187,7 @@ So, regardless of your role on your team—designer, frontend developer, or back
 
 One reasonable question to ask is, "if web technologies were a step backward in building soft realtime apps, why are we using them?" Let's just spend a second and go back to the fundamentals of what makes the web powerful and the building blocks of our modern tools.
 
-The web as we know it was formed around a request cycle that required the browser to initiate the conversation. Request some information, render a response, repeat. We added some powerful things along the way with javascript, XMLHTTPRequest (window.fetch and all the other ways to fetch data asynchronously), and great advancements in CSS and client side frameworks. The web is powerful because we can build massive and ubiquitous applications without managing independent installs or individually installed databases. 
+The web as we know it was formed around a request cycle that required the browser to initiate the conversation. Request some information, render a response, repeat. We added some powerful things along the way with javascript, XMLHTTPRequest (window.fetch and all the other ways to fetch data asynchronously), and great advancements in CSS and client side frameworks. The web is powerful because we can build massive and ubiquitous applications without managing independent installs or individually installed databases.
 
 But the idea of a server pushing data down to the browser based on events triggered by something other than a request is fairly modern for the web. Before websockets, there were tricks like long-polling where a browser opened a request to a server and the server keeps the request open until there's data to send back, hooked up in a loop to keep the conversation bi-directional.
 
@@ -256,8 +256,8 @@ Note that there's actually a worse scenario where both succeed but there's only 
 <!--
 Tim
 
-Ok so let's talk problems. You probably see the most obvious ones. 
-* We're soft-committing inventory that we don't have. 
+Ok so let's talk problems. You probably see the most obvious ones.
+* We're soft-committing inventory that we don't have.
 * If we don't catch it here, the customer service department has to send a difficult email that we've missed the customer's expectations and have to cancel and potentially refund the order
 * The user is at a UX dead end.
 
@@ -306,6 +306,8 @@ Why is this better? While there is still a bit of a race condition in that someo
 
 We're mimicking reality in this situation and letting users know the information as we know it so that they are aware of what they're actually able to do in the system. And we're not allowing them to move forward in the process under false pretenses. So they know when an item is "claimed" by another customer. And that other customer knows that they have a set amount of time to decide before they no longer have "dibs" on that item. So, it's really important in these types of situations, to make sure you are exposing the state of an item to the user, so that they know what they are able to do with it.
 
+We haven't given them a dead end
+
 -->
 
 ---
@@ -322,13 +324,13 @@ But, let's take a look first:
 
 ---
 <div style="display: flex; justify-content: normal; align-items: center; margin-bottom: 0;">
-  <h2 style="padding-right: 150px; padding-bottom: 30px;">Example</h2> 
+  <h2 style="padding-right: 150px; padding-bottom: 30px;">Example</h2>
   <iframe style="width: 43%; height: 4rem; border: none;" src="/social/rate_intensity"></iframe>
 </div>
 
 <iframe style="width:45%; height: 50rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/posts"></iframe>
 
-<!-- 
+<!--
 (Tim)
 
 _Start out slowly with the data rate_
