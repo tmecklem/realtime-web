@@ -19,9 +19,9 @@ defmodule RealtimeWeb.RateIntensityLive.Index do
   def render(assigns) do
     ~H"""
     <form phx-change="change_rate">
-      <div class="slider">
-        <input type="range" name="rate" min="1" max="11" value={@rate}>
-        <p><%= @rate %></p>
+      <div class="slider" style="display: flex; justify content: space-evenly; align-items: center;">
+        <input style="margin-bottom: 0;" type="range" name="rate" min="1" max="11" value={@rate}>
+        <p style="margin-left: 20px; margin-bottom: 0;"><%= @rate %></p>
       </div>
     </form>
     """
