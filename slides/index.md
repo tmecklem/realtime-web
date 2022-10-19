@@ -112,13 +112,6 @@ _color: white
 # Designing Realtime Web Apps
 ##### Katie Pohlman & Tim Mecklem
 
-<!--
-INTROS:
-
-Katie
-
-Hi! My name is Katie Pohlman and I am a Principal UX Designer at Launch Scout. Launch Scout is a custom software development agency based in Cincinnati, OH. And  
- -->
 
 ---
 
@@ -297,12 +290,12 @@ But, let's take a look first:
   <iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/posts"></iframe>
 </div>
 
-<!-- 
+<!--
 (Tim)
 
 _Start out slowly with the data rate_
 
-Here we've got a social feed coming in from friends all over the world. We've got a user, post content, location, and relevancy score along with it that our friends in the data science department have associated with the post's relevancy to the user's ever-changing interests. 
+Here we've got a social feed coming in from friends all over the world. We've got a user, post content, location, and relevancy score along with it that our friends in the data science department have associated with the post's relevancy to the user's ever-changing interests.
 
 When the activity rate is low, say one every few seconds, a user could consume that for a while and feel connected with their friends. Real-time is better in this case, keeping the user from having to reload the page constantly to get the latest information. It's like auto doom-scroll and who doesn't want that?!
 
@@ -368,9 +361,9 @@ We've been talking a lot about how to best display data in realtime, and it's be
 
 <!--
   (Tim)
-  
+
 It's fun to present live demo kind of stuff like this in slides. You get a sense for how powerful real-time apps can be in a simple screen. In fact, you might be inclined to think that maybe we faked the backend and just wrote all of this in client-side javascript for the sake of the presentation. But the truth is that these examples are frames in the slides that are talking to a real backend server, pushing events through a websocket, mimicking separate http sessions, calling business logic actions on the backend, and triggering push events back to the client.
-  
+
 Perhaps more interesting is that there isn't a single line of javascript that we wrote to support any of this. The only js you'll find in the repo was the boilerplate websocket code generated on project create. The reason I bring this up is that the framework choice really matters for building realtime user experiences. If you select a web stack that not only allows you to build a strongly cohesive, loosely coupled system but also supports ongoing event driven "conversations" with your users as a first class feature form the backend all the way to the browser, you don't have to spend all of your time building new API endpoints and coordinating event handoffs from frontend to backend and back again.
 
 In our case, we chose Phoenix and LiveView for this demo. Because of the ability of Elixir and Erlang applications to host thousands or even millions of lightweight processes that each can pass messages to each other and each represent a small piece of running state that keeps the conversation going between a user and the information, there's incredible power that we get from the language and tools... batteries included for very little development effort. There are other technologies that will let you accomplish this feat as well. Some examples are Rails with Hotwire, Laravel with livewire, next.js with server side render React, .NET with Blazor. The list is growing rapidly, and you may notice that it does _not_ look like Rails, GraphQL and React, or .NET, json-api and Vue. Because much of the power of these systems is in the removal of separation between the backend and frontend. LiveView uses a single templating language to render a full page on load and then connects automatically via websocket to being the conversation, using the same templates to re-render based on events from the server or from the client as needed with almost no waste over the websocket wire. If you haven't seen these technologies in action, they border on the line of magic for how much ceremony, duplication, and boilerplate that they remove.
@@ -387,7 +380,7 @@ If Conway's Law is real, that we design systems that mirror our organization's c
 ### Something to keep in mind
 # Disconnections and partial realtime
 
-<!-- 
+<!--
 
 (Tim)
 
@@ -427,4 +420,3 @@ _color: white
  -->
 # Questions?
 ### launchscout.com
-
