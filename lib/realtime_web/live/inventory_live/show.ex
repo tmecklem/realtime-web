@@ -13,9 +13,11 @@ defmodule RealtimeWeb.InventoryLive.Show do
   @impl true
   def render(assigns) do
     ~H"""
-    Stock Level: <%= @product.stock_level %>
-    <button phx-click="decrement">-</button>
-    <button phx-click="increment">+</button>
+    <div style="display: flex; justify-content: flex-start; align-items: center;">
+    <button class="button-outline" style="font-size: 35px; border: none; margin-bottom: 6px; padding-right: 10;" phx-click="decrement">-</button>
+    <span style="font-size: 25px; padding-left: 10;"><%= @product.stock_level %></span>
+    <button class="button-outline" style="font-size: 30px; border: none; margin-bottom: 0; padding-left: 10;" phx-click="increment">+</button>
+    </div>
     """
   end
 

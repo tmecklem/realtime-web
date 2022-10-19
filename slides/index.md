@@ -209,9 +209,10 @@ So let's take a look at what that may look like.
 
 ---
 
-## Example - low inventory on a commerce page
-
-<iframe style="width:45%; height:3rem; border: 3px solid lightgray; border-radius: 10px;" src="/commerce/inventory/scarce-scarf"></iframe>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<h2>Example - low inventory on a commerce page</h2>
+<iframe style="width: 23%; height: 3rem; border: none;" src="/commerce/inventory/scarce-scarf"></iframe>
+</div>
 
 <div style="display: flex; gap: 1rem;">
 <iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;"
@@ -259,10 +260,10 @@ So what does a better solution look like?
 -->
 
 ---
-
-## One potential solution
-
-<iframe style="width:45%; height:3rem; border: 3px solid lightgray; border-radius: 10px;" src="/commerce/inventory/rare-raincoat"></iframe>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h2>One potential solution</h2>
+  <iframe style="width: 23%; height: 3rem; border: none;" src="/commerce/inventory/rare-raincoat"></iframe>
+</div>
 
 <div style="display: flex; gap: 1rem;">
 <iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;"
@@ -301,15 +302,14 @@ But, let's take a look first:
  -->
 
 ---
-## Example -
-
-<iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/rate_intensity"></iframe>
-
-<div style="display: flex; gap: 1rem;">
-  <iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/posts"></iframe>
+<div style="display: flex; justify-content: normal; align-items: center; margin-bottom: 0;">
+  <h2 style="padding-right: 150px; padding-bottom: 30px;">Example</h2> 
+  <iframe style="width: 43%; height: 4rem; border: none;" src="/social/rate_intensity"></iframe>
 </div>
 
-<!--
+<iframe style="width:45%; height: 50rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/posts"></iframe>
+
+<!-- 
 (Tim)
 
 _Start out slowly with the data rate_
@@ -332,13 +332,14 @@ So, that seems pretty obvious, right? In this example, if you decide to just dis
 
 
 ---
-## One potential solution
-
-<iframe style="width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/rate_intensity"></iframe>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h2>One potential solution</h2>
+  <iframe style="width:25%; height:3rem; border: none;" src="/social/rate_intensity"></iframe>
+</div>
 
 <div style="display: flex; gap: 1rem;">
-  <iframe style="display:inline-block;float:left;width:45%; height:30rem;" src="/social/posts" frameBorder="1"></iframe>
-  <iframe style="display:inline-block;float:left;width:45%; height:30rem;" src="/social/better_posts" frameBorder="1"></iframe>
+  <iframe style="display:inline-block; float:left; width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/posts" frameBorder="1"></iframe>
+  <iframe style="display:inline-block; float:left; width:45%; height:30rem; border: 3px solid lightgray; border-radius: 10px;" src="/social/better_posts" frameBorder="1"></iframe>
 </div>
 
 <!--
