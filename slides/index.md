@@ -112,6 +112,9 @@ _color: white
 # Designing Realtime Web Apps
 ##### Katie Pohlman & Tim Mecklem
 
+---
+
+<iframe src="https://wall.sli.do/event/m8rbTQytmGvESi6kW9HjF5?section=97e4b684-b7ed-41cf-9917-b60f4a485ca2" style="height:30rem;"></iframe>
 
 ---
 
@@ -377,6 +380,11 @@ We've been talking a lot about how to best display data in realtime, and it's be
  -->
 
 ---
+
+<iframe src="https://wall.sli.do/event/m8rbTQytmGvESi6kW9HjF5?section=97e4b684-b7ed-41cf-9917-b60f4a485ca2" style="height:30rem;"></iframe>
+
+---
+
 # Tie all together with the backend stuff
 
 <!--
@@ -429,6 +437,10 @@ How about a similar developer-centric example? When you have a hot-reload web st
 Here's the danger of being in the realtime uncanny valley for too long. It erodes the user's confidence that your app is giving them the information they need when they need it. Losing confidence means loss of trust. Between mashes of the refresh button, your user may begin to question the whole experience. In the worst case, (one that I experience in a particular app that I use at least once a week for instance), I have very low trust and I spend a lot of time making sure that the data I'm putting in and getting out is what I need it to be. I'm close to a 3 on the net promoter score for this app, and the primary reason is the lack of trust in the realtime experience that they are trying to deliver. It would be better to embrace a statically rendered site than to hang out indefinitely in the realtime uncanny valley. Keep that in mind as you _hypothetically_ plan a journey like this.
 
 -->
+
+---
+
+<iframe src="https://wall.sli.do/event/m8rbTQytmGvESi6kW9HjF5?section=97e4b684-b7ed-41cf-9917-b60f4a485ca2" style="height:30rem;"></iframe>
 
 ---
 
