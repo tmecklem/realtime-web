@@ -114,7 +114,16 @@ _color: white
 
 ---
 
-<iframe src="https://wall.sli.do/event/m8rbTQytmGvESi6kW9HjF5?section=97e4b684-b7ed-41cf-9917-b60f4a485ca2" style="height:30rem;"></iframe>
+<iframe src="https://wall.sli.do/event/m8rbTQytmGvESi6kW9HjF5?section=97e4b684-b7ed-41cf-9917-b60f4a485ca2" style="height:33rem;"></iframe>
+
+<!-- 
+(Tim)
+
+Let's start today's real-time talk with a little real-time poll. What is your primary role in software development?
+
+Thank you for those answers. I think we have a little something for everyone today, so let's get started!
+
+ -->
 
 ---
 
@@ -124,12 +133,28 @@ _color: white
 
 <!--
 
-If you look back to pre-web days, many applications were rich client desktop apps that connected to internal servers, or a little further back there were dumb terminals that connected to a mainframe. The apps that ran on these platforms did not have the benefit of running on incredibly fast hardware or utilizing Internet speeds that are 10x of the old internal ethernet networks, but they were often more real-time than the typical web application. The move to web applications and the internet opened up a ton of new possibilities, but it also introduced new constraints, such as the request nature of HTTP and one-and-done rendered pages. We became conditioned to see a snapshot of reality rather than a fluid picture.
+Here's a question to ponder
 
-But that doesn't mean that information behind the scenes remained static. In fact, nearly every modern web application is built on a mountain of changes that happen constantly. Inventory changes, fulfillment centers take orders and physically assemble them, changing the status as they go. Forum users post new comments, people add emoji reactions to friend's posts. People cllaborate simultaneously on the same documents/records. Some apps handle this rapid change well because the business domain demands it. Some apps have been able to ignore the problem altogether. I'd argue that people's expectations are rising, and a day is coming when web app developers will no longer be able to present static snapshots of realtime information and satisfy users' expectations.
+Before the web, rich client apps connected to on premise databases
+Green screen apps connected to mainframes
+Slower hardware, but often more up to the minute information for important decisions
+
+Web based on request from browser triggering a response is more constrained
+Conditioned us to expect a static snapshot of information rather than the fluid reality
+
+But information isn't static.
+We know data in our systems changes constantly
+Inventory changes, 
+forum users posting, emoji reactions flying all over the place
+simultaneous document editing
+
+Some apps had to be realtime from the start due to the domain, others have been able to sidestep it.
+
+I'd argue that we're entering a stage in web product development that users are beginning to expect relevant information to be updated as it changes, not as they request it.
 
 The exciting news is that web technologies have advanced far enough to support seamless realtime interactions, and we've entered a new period that allows us the convenience of writing apps that reflect shift in reality with a similar effort to the days before websockets and push notifications.
 
+Next Slide: (Tim) Our industry has a good problem.
 -->
 
 ---
@@ -137,15 +162,24 @@ The exciting news is that web technologies have advanced far enough to support s
 # We're just catching up to the <br/>capability of our tools
 
 <!-- Tim  Approx 1 minute -->
+
 <!--
-Our industry has a good problem. Our languages and frameworks are more capable than they have ever been at giving people up to the second information. Used appropriately, we can use them to help people make better decisions, ease the experience of buying products, and improve interactions with other people. But as a whole, I've observed that teams are struggling in the execution of applying the tech to improve the experience with real-time information.
 
-Sometimes we're stuck using technologies that are less fit to deliver this different paradigm where these rich experiences are first class citizens of the technical architecture. Sometimes we fail to understand the needs of our users and how to support them.
+Our industry has a good problem. 
+Fully capable languages and frameworks to solve the real-time needs of our users.
+What I've observed in working across business domains with large and small multidisciplinary teams alike
+Struggling in the execution of applying technology to improve the experience.
 
-I think most of our difficulties lie in the paradigm shift. We need new vocabulary for this kind of real-time experience, and today I'll use the phrase "conversation capable" to describe technology that has built-in support for a constant bidirectional conversation between the information and the user.
+Sometimes we're stuck using technologies that are less fit to deliver this different paradigm where these rich experiences are first class citizens of the technical architecture. 
+Sometimes we fail to understand the needs of our users and how to support them.
 
-But languages and frameworks are only a part of building real-time experiences. Other factors are more important, because they should be driving our decisions about technology.
+I think most of our difficulties lie in the paradigm shift. 
 
+Need new vocabulary for this kind of real-time experience, and today I'll use the phrase "conversation-capable" to describe technology that has built-in support for a constant bidirectional conversation between the information and the user.
+
+But languages and frameworks are only a part of building real-time experiences. Other factors are more important, and they should be driving our decisions about technology.
+
+Next slide: (Katie) Segue into the takeaway and intros
 -->
 
 ---
@@ -162,7 +196,8 @@ Katie
 
 Hi! My name is Katie Pohlman and I am a Principal UX Designer at Launch Scout. Launch Scout is a custom software development agency based in Cincinnati, OH. And we build custom web applications for our clients. My role there, as a Principal UX Designer, is two fold—as a member of the Principal Group, I am helping to grow and improve our team's skillset and helping to shape and define what it means to deliver well on projects at Launch Scout. As a UX Designer, I am leading the UX and UI design and then implementing those designs with HTML and CSS. So, I am on the front-end of things, and I'll let Tim introduce himself.
 
-Tim
+Tim 
+
 VP of Engineering and Delivery
 Worked in enterprise Java, led native mobile teams, and have fallen in love with small mighty teams solving big problems with innovative technology.
 20 years of experience
@@ -176,26 +211,43 @@ Before we dig in, though, there is something that I want to call attention to. A
 
 <!--
 So, regardless of your role on your team—designer, frontend developer, or backend developer, whatever it may be—don't tune out the stuff today that seems unrelated to your work. It's not. As we'll demonstrate, we can't meet users' realtime needs without end-to-end solutions.
+
+Next slide: (Tim) If web technologies were a step backward in...
 -->
 
 ---
 
-# How did we get here?
+# The state of real-time web applications
 
 <!-- Tim  approx 3 minutes -->
 <!--
 
-One reasonable question to ask is, "if web technologies were a step backward in building soft realtime apps, why are we using them?" Let's just spend a second and go back to the fundamentals of what makes the web powerful and the building blocks of our modern tools.
+If web technologies were a step backward in building soft realtime apps, why are we using them?
 
-The web as we know it was formed around a request cycle that required the browser to initiate the conversation. Request some information, render a response, repeat. We added some powerful things along the way with javascript, XMLHTTPRequest (window.fetch and all the other ways to fetch data asynchronously), and great advancements in CSS and client side frameworks. The web is powerful because we can build massive and ubiquitous applications without managing independent installs or individually installed databases.
+Let's go back to the fundamentals of what makes the web powerful as the building blocks of our modern tools.
 
-But the idea of a server pushing data down to the browser based on events triggered by something other than a request is fairly modern for the web. Before websockets, there were tricks like long-polling where a browser opened a request to a server and the server keeps the request open until there's data to send back, hooked up in a loop to keep the conversation bi-directional.
+The web as we know it was formed around a request cycle that required the browser to initiate the conversation. 
 
-But in the earlier days, say back in the earlier 2000s, it was common to build the entire system around the request cycle and snapshots of reality. We relied so much on these crisply rendered one-off pages that we built entire tooling ecosystems on this model that break down when the reality of constant change is introduced. Just look at data paging for example. Most paging is still based around a query that utilizes a page size and offset. But when new records come in that interleave the existing records, the illusion of a snapshot of the paged data breaks down. Some records repeat across pages. Some data disappears because the offset shifted. We don't have time to dive into paging specifically today, and it's just one of the industry's "solved" problems that becomes unsolved when taking an app realtime.
+Request some information, render a response, repeat. 
 
-So you've probably picked up that talk is a little bit tactical and little bit strategic.
+Added powerful things along the way with javascript, especially this XMLHTTPRequest thing over a decade ago that we hijacked to let us make asynchronous background JSON calls.
+
+Improved CSS to let us build beautifully rich interactions.
+
+Web is this ubiquitous, massive applications without independent installs
+
+But the idea of a server pushing data down to the browser based on events triggered by something other than a request is fairly modern for the web. 
+Before websockets, tricks like long-polling to mimic server push.
+
+But the thing is that most modern web tooling, especially for backed web frameworks, assumes this basic request model is still the foundation of everything. 
+
+Server and client technologies are still primarily concerned with routing requests and rendering pages, not with fully utilizing web sockets and other constant conversation methods.
+
+A lot of problems exist becuase of the mismatch of the abstraction between what the web was built upon and what users need and have grown to expect.
 
 With that in mind, let's talk about the principles through some common problems for realtime apps.
+
+Next slide: (Katie) The first problem we want to highlight today...
  -->
 
 ---
@@ -210,15 +262,9 @@ With that in mind, let's talk about the principles through some common problems 
 The first problem we want to highlight today is the problem of scarce resources. And this problem is probably most commonly seen in systems that handle inventory management, and an example of how that manifests itself is out of stock situations on ecommerce sites. So, let's look at ecommerce specifically. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event. And it is our job as designers and developers to make sure customers have the right information about an item at the right time to make informed decisions about that buying process. So, what state or status is the item in? Is it available for pre-order, is it available to purchase, is it out of stock? All of these things and more are questions that a customer has during the buying process.
 
 So let's take a look at what that may look like.
+
+Next slide: (Tim) commerce example
  -->
-
----
-
-## Example - low inventory on a commerce page
-
----
-
-![](images/321-parking-space.png)
 
 ---
 
@@ -235,17 +281,12 @@ So let's take a look at what that may look like.
 </div>
 
 <!--
-Tim
 
-For this presentation, we've embedded some actual full stack apps to demostrate problems and potential solutions rather than screenshots or peeling away to a separate window. We're using state of the art iframes here, people, so if something goes wrong we'll adjust and keep going. I think we're all paid up to the demo gods.
-
-T**Talk through the scenario of two people visiting the same product pages in different sessions**
-1) Add the product to cart A
-2) Add the product to cart B
-3) Checkout out from cart B
-4) Attempt checkout from cart A, see error
+*Tim, stick the the description of what you're doing, not a lot of narrative. Katie does this in hers!*
 
 Note that there's actually a worse scenario where both succeed but there's only one product to fulfill both orders
+
+Next slide: (Tim) Ok, so let's talk problems
 
  -->
 
@@ -263,6 +304,8 @@ Ok so let's talk problems. You probably see the most obvious ones.
 
 Not great!
 
+Next slide: (Katie) Those are all problems...
+
 -->
 
 <!--
@@ -275,6 +318,8 @@ Maybe they were wanting to buy that scarf as a birthday present for their grandm
 So, while the solution prevents a system problem of two people purchasing the same item, it actually ignores the people problem that it creates by not allowing them to make informed decisions based on accurate information.  
 
 So what does a better solution look like?
+
+Next slide: (Tim) demo of better solution
 
 -->
 
@@ -293,7 +338,15 @@ So what does a better solution look like?
 
 <!-- Tim
 
-Drive the demo of the cart that improves the experience -->
+Drive the demo of the cart that improves the experience 
+
+Two things to note:
+1: Entire system updates to reflect inventory ups and downs
+2: User with item in cart has a visual timer to let them know they are on a time limit
+
+Next slide: (Katie) Why is this better?
+
+-->
 
 ---
 ### Why is this better?
@@ -308,6 +361,8 @@ We're mimicking reality in this situation and letting users know the information
 
 We haven't given them a dead end
 
+Next slide: (Katie) Alright, we've talked about systems that manage resources...
+
 -->
 
 ---
@@ -320,7 +375,9 @@ We haven't given them a dead end
 Alright, we've talked about systems that manage resources and making sure that we are exposing the realtime state or status of those resources to the user. And there are other types of systems that benefit from realtime data, as well. And one of the others that we want to highlight today are systems that handle rapidly changing data—so things like social media, or a news site, or maybe a polling system, or a dashboard of some sort. There are lots of examples of these types of systems. But the problem that presents itself in these systems is that we need to decide how to display the data to the user in a way that is not overwhelming. So, you can forgo it entirely and not worry about updating in real time. Which is bad because then your users don't know if the data their seeing is accurate and could be making a bad decision based on it or are just unaware of something that is happening. Or, you can decide to display the data coming in in realtime, which then raises the question of how to do that well.
 
 But, let's take a look first:
- -->
+
+Next slide: (Tim) social demo
+-->
 
 ---
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0;">
@@ -333,14 +390,24 @@ But, let's take a look first:
 <!--
 (Tim)
 
+**Stick to the literal description**
+
 _Start out slowly with the data rate_
 
-Here we've got a social feed coming in from friends all over the world. We've got a user, post content, location, and relevancy score along with it that our friends in the data science department have associated with the post's relevancy to the user's ever-changing interests.
+We have here a social media timeline of friends of this user
+Four pieces of information: 
+friend's username, 
+content of the post (They all like Shakespeare!)
+location
+data science team's relevancy score
 
-When the activity rate is low, say one every few seconds, a user could consume that for a while and feel connected with their friends. Real-time is better in this case, keeping the user from having to reload the page constantly to get the latest information. It's like auto doom-scroll and who doesn't want that?!
+This is just a great feed of wonderful content, lots of tragedy quotes, perfect for doomscrolling
 
-But what happens when the information comes in a little faster, say our user has lots of active friends? It's not long before the system stops being useful and starts getting in the way. This is actually worse than a statically rendered page, because at least you can read that right?
+Decent rate of information, can read it and stay connected with the whereabout of that Romeo character
 
+But what happens when the garden hose becomes a firehose?
+
+Next slide: (Katie) What are the problems? So, that seems pretty obvious...
 -->
 
 ---
@@ -349,6 +416,8 @@ But what happens when the information comes in a little faster, say our user has
 <!--
 
 So, that seems pretty obvious, right? In this example, if you decide to just display everything as it comes in, you have to think about how that may work when the influx of data varies. What happens when the data comes in at a slower pace? At a higher pace? Or at a an insanely high pace? There is a threshold where this solution of "just show it to the user" doesn't work. And we have to make sure we identify it and address it. So, how do we do this better?
+
+Next slide: (Tim) demonstration of potential fixes
  -->
 
 
@@ -366,17 +435,29 @@ So, that seems pretty obvious, right? In this example, if you decide to just dis
 <!--
 (Tim)
 
-I'll share a little secret with you. We shopped this problem around internally, and we struggled to find a really great catchall solution. Think about how Facebook solves this problem. They curate the list, dropping things that they find less relevant or likely to keep those engagement metrics high. Twitter lets you scratch that chronoligcal completionist itch, but if you have more than a hundred active friends, you have to set aside time on your calendar to "engage" with them. You've got a couple of options, and one of the better ones is to use metadata to guide what to show and what to hide.
+I'll share a little secret with you. We shopped this problem around internally, and we struggled to find a really great catchall solution. 
 
-If you're not familiar with that term, metadata is information about the content in this case. So, you could use a location filter to only show posts from a certain region of the world. Or you could filter based on friend groups, like Instagram's "close friends" or Twitter lists. In our case, we chose to do two things as examples.
+Think about how Facebook solves this problem by curating the list dropp what the algorithm finds less "engaging".
 
-First, we pause the feed if it exceeds more than a post eveery 4-5 seconds. This lets you catch up your reading and choose to load the rest. There are plently of clever ways to do this, including infinite scrolling and paging. Our solution is conference talk simple. We just queue up the unshown posts and load them when the user clicks the View more link.
+Twitter lets you scratch that chronoligical completionist itch but you have to set aside time on your calendar to get through it all. 
+
+Couple of options
+
+First, we pause the feed if it exceeds more than a post eveery 4-5 seconds. 
+This lets you catch up your reading and choose to load the rest.
+There are plently of clever ways to do this, including infinite scrolling and paging. Our example keeps it simple with a single button to load the latest
+
+A more interesting solution is to utilize the metadata of the posts.
+Explain metadata
 
 The second thing that we did was put some of the filtering control in the user's hands. We allow the user to filter out enything that has lower than a 90% relevancy score.
 
 _Increase rate slider until it's moving too fast even for the relevancy filter_
 
-As you can see, everything has limits, including our solution. Data firehose problems present an especially hard balance to strike to find what the user really needs to be able to do.
+As you can see, everything has limits, including our solution. Data firehose problems present an especially hard balance to strike to find what the user really needs to be able to do. 
+
+Next slide: (Katie) Why is this better?
+
 -->
 
 ---
@@ -394,43 +475,136 @@ There are other intentions with data, as well, obviously, and those intentions s
 
 All of this to say, that when you are displaying realtime data to your users, it's crucial to consider how that data is intended to be used. Because if you show them the data in realtime in a way that doesn't consider their intentions, you're actually going to cause them frustration instead of helping them.
 
-We've been talking a lot about how to best display data in realtime, and it's been heavily focused on the design/front-end side of things. And I told you this is a end-to-end responsibility. So, let's bring it full-circle.
+Next slide: (Tim) But wait there's more!
+
  -->
-
+ 
 ---
 
-<iframe src="https://wall.sli.do/event/m8rbTQytmGvESi6kW9HjF5?section=97e4b684-b7ed-41cf-9917-b60f4a485ca2" style="height:30rem;"></iframe>
+# But wait, there's more!
 
----
-
-# Tie all together with the backend stuff
+* Seamless Session Handoff Between Devices
+* Collaborative Editing/Drawing
+* Handling Disconnects Gracefully
+* Managing Notifications Across Multiple Connected Devices
+* Integrating IoT and Other Non-web Events
+* Dynamic Maps and Location Based Services
+* Paging Data
 
 <!--
-  (Tim)
+(Tim or Katie?) In our experiences building real-time applications, we've run into a bunch of different problems. These range from managing how to update blockchain explorers with the latest transactions and smart contracts, handling disconnects for users bidding in web auctions, tracking vehicle position data and updating maps, and managing other IoT event data. We don't have time to talk through more examples, but we've got a bunch of experiences to share and we'd love to connect after the talk.
+ -->
 
-It's fun to present live demo kind of stuff like this in slides. You get a sense for how powerful real-time apps can be in a simple screen. In fact, you might be inclined to think that maybe we faked the backend and just wrote all of this in client-side javascript for the sake of the presentation. But the truth is that these examples are frames in the slides that are talking to a real backend server, pushing events through a websocket, mimicking separate http sessions, calling business logic actions on the backend, and triggering push events back to the client.
+<!--
+(Katie)
+We've been talking a lot about how to best display data in realtime, and it's been heavily focused on the design/front-end side of things. And I told you this is a end-to-end responsibility. So, let's bring it full-circle.
 
-Perhaps more interesting is that there isn't a single line of javascript that we wrote to support any of this. The only js you'll find in the repo was the boilerplate websocket code generated on project create. The reason I bring this up is that the framework choice really matters for building realtime user experiences. If you select a web stack that not only allows you to build a strongly cohesive, loosely coupled system but also supports ongoing event driven "conversations" with your users as a first class feature form the backend all the way to the browser, you don't have to spend all of your time building new API endpoints and coordinating event handoffs from frontend to backend and back again.
+<!-- Move the slido to the word cloud section -->
 
-In our case, we chose Phoenix and LiveView for this demo. Because of the ability of Elixir and Erlang applications to host thousands or even millions of lightweight processes that each can pass messages to each other and each represent a small piece of running state that keeps the conversation going between a user and the information, there's incredible power that we get from the language and tools... batteries included for very little development effort. There are other technologies that will let you accomplish this feat as well. Some examples are Rails with Hotwire, Laravel with livewire, next.js with server side render React, .NET with Blazor. The list is growing rapidly, and you may notice that it does _not_ look like Rails, GraphQL and React, or .NET, json-api and Vue. Because much of the power of these systems is in the removal of separation between the backend and frontend. LiveView uses a single templating language to render a full page on load and then connects automatically via websocket to being the conversation, using the same templates to re-render based on events from the server or from the client as needed with almost no waste over the websocket wire. If you haven't seen these technologies in action, they border on the line of magic for how much ceremony, duplication, and boilerplate that they remove.
+---
 
-Okay, I'll end my little love note here and get back on track.
+<iframe src="https://wall.sli.do/event/m8rbTQytmGvESi6kW9HjF5?section=97e4b684-b7ed-41cf-9917-b60f4a485ca2" style="height:33rem;"></iframe>
 
-Can you build a realtime app with separate front and backend technologies that are overwhelmingly used and adopted? Yes, of course, and to great success. Is my favorite technology the right choice for every problem at every scale? Of course not. But I'm fully convinced after working with enterprise stacks and frontend stacks and pancake stacks that choosing a "conversation capable" solution that combines traditional requests and responses with event-driven websockets seamlessly is a force multiplier like we haven't seen since the web community "discovered" asynchronous calls with XMLHTTPRequest more than a decade ago.
+<!-- (Tim)
 
-If Conway's Law is real, that we design systems that mirror our organization's communication structure... then I think that also implies that we should be looking closely at any technology that allows us to break down the often-artifical separation between frontend and backend technologies and allows frontend and backend devs and designers to work on a single cohesive system while retaining the loose coupling that supports multi-disciplinary teams to be productive together.
+But first, a quick poll! We'll hang out here for a minute or so while you add your answers
+
+Thank you for sharing! This is really interesting!
+
+Next slide: (Tim) We had a lot of fun...
 
 -->
 
 ---
-### Something to keep in mind
-# Disconnections and partial realtime
+
+# Web technologies, revisited
+
+<!--
+(Tim)
+
+We had a lot of fun building the slides for this talk, because we chose technologies that support the end-to-end user experience as part of the framework.
+
+Perhaps more interesting is that there isn't a single line of javascript that we wrote to support any of this real-time behavior. 
+
+There's only one templating language for the server and client, and no duplicated logic between frontend and backend layers
+
+Handling click events in the browser is 99% identical to handling events generated from backend actions, in the same context, with the same bidirectional conversation paradigm built into the framework.
+
+Information over the wire is compressed and handled incredibly efficiently in DOM updates
+
+This is powerful. Which leads me to make this case:
+
+Next slide: (Tim) In our case...
+-->
+
+---
+
+# The case for something different 
+
+* Elixir, Phoenix, and LiveView
+* Ruby, Rails, and Hotwire
+* PHP, Laravel, and Livewire
+* next.js and SSR React
+* .NET and Blazor
+
+<!--
+In our case, we chose Phoenix and LiveView for this demo. There are other approximations to this technology in other stacks.
+
+Without going into the nitty gritty details, the thing that makes LiveView stand out from even the others on this list is its foundation on an Erlang technology called OTP. OTP allows us to have thousands or even millions of tiny lightweight processes holding state and sending each other messages and events, with sophisticated lifecycle management.
+
+Because these processes power the backend business layer as well as each individual conversation with the clients over channels and websockets, the entire system looks a bit different than the typical n-tier architecture. Instead of layer by layer calls and responses, think neurons and synapses where some of those signals travel directly to the browser of every connected user in real-time vs waiting for client-side action.
+
+Okay, I'll end my little love note here and get back on track.
+
+Next slide: (Tim) Can you build a...
+-->
+
+---
+
+# Keys to the technology decision
+
+<!--
+Can you build a realtime app with more traditional front and backend technologies that are overwhelmingly popular today? Yes, of course, and to great success.
+
+Is my favorite technology the right choice for every problem at every scale? Of course not. 
+
+But I'm convinced after working with
+enterprise stacks
+frontend stacks
+backend stacks
+pancake stacks
+
+Choosing a "conversation capable" solution that combines channels and websockets alongside requests and responses seamlessy is a game-changer that we haven't seen in over a decade since we discovered ajax.
+
+Beyond the technological advances, there's something else that makes adopting something like LiveView a force multiplier.
+
+If Conway's Law is real, which asserts that we tend to build systems and applications that mirror our organization's communication structure... 
+
+then it means that isolated and compartmentalized teams each focusing on their own disciplines tend to create products that include these communication bottlenecks and choke points. There's nothing wrong with having different disciplines, in fact you need that for modern applications.
+
+But if you can choose a technology and form team structures that 
+value the end to end experience and 
+combine the backend team's knowledge of changing information
+with the frontend team's rich interactivity
+and closely involve the designers of both the architecture and the user experience...
+
+You get a cohesive application with loose coupling throughout. Not only a more maintainable system, but a better experience all around. 
+
+Pick you a technology that enables your team to work at its best, if you are able to make that decision.
+
+Next slide: (Tim) One final consideration
+
+-->
+
+---
+### One Final Consideration
+# The Real-time Uncanny Valley
 
 <!--
 
 (Tim)
 
-Okay, let's get hypothetical for a second. You have a statically rendered application, fully HTTP browser request response stuff. You want to transition it to a real-time experience, supporting your user's decision-making needs with event-driven backends and without full page re-renders everywhere. There's a pitfall to be aware of.
+Okay, let's get hypothetical for a second. You want to transition your app to a real-time experience. There's a pitfall to be aware of.
 
 Let's call this the "Realtime uncanny valley". At some point, without careful planning you will have a app-in-transition, that sometimes feels real-time and sometimes doesn't. This can be confusing for a user. For example, how many of you have encountered this page?
 -->
@@ -442,23 +616,31 @@ Let's call this the "Realtime uncanny valley". At some point, without careful pl
 <!--
 (Tim)
 
-Now I don't claim to be the smartest person on the planet, but wow if I haven't spent more time than I'd like to admit just starting at the screen waiting for it to do something. Can I get a quick show of hands for anyone else who knows where I'm going with this?
+Now I don't claim to be the smartest person on the planet, but I've spent more time staring at this screen than I care to admit.
 
 You create a shiny new repository, and you craft a beautiful first commit message. You dutifully follow the instructions on the screen and you push that perfect commit up to the repo and then... you wait.
 
-Why do you wait? If all of GitHub was static pages, you'd know to click the refresh button. But almost all of GitHub is real-time! You submit a PR and _stuff happens_. People comment, CI builds update colors telling you how well your code performed with tests. It's lively, it's dynamic! But not this screen.
+Why do you wait? If all of GitHub was one and done rendered pages, you'd know to click the refresh button. But almost all of GitHub is real-time! You submit a PR and _stuff happens_. People comment, CI builds update colors telling you how well your code performed with tests. It's lively, it's dynamic! But not this screen.
 
-It's the uncanny valley. Everything else convinces you that you've got a realtime experience, and then you encounter this non-player character that's staring past you and doing a forward moonwalk into a wall.
+It's the uncanny valley. Everything else convinces you that you've got a realtime experience, and then you encounter this non-player character that's staring right past you.
 
-How about a similar developer-centric example? When you have a hot-reload web stack that re-renders the page every time you save a relevant file. Except that sometimes, usually on Mondays, it doesn't work. What do you do? If you're like me, you resort to methodically reloading the page to make sure it picked up your changes.
+Here's the danger of being in the realtime uncanny valley for too long. 
 
-Here's the danger of being in the realtime uncanny valley for too long. It erodes the user's confidence that your app is giving them the information they need when they need it. Losing confidence means loss of trust. Between mashes of the refresh button, your user may begin to question the whole experience. In the worst case, (one that I experience in a particular app that I use at least once a week for instance), I have very low trust and I spend a lot of time making sure that the data I'm putting in and getting out is what I need it to be. I'm close to a 3 on the net promoter score for this app, and the primary reason is the lack of trust in the realtime experience that they are trying to deliver. It would be better to embrace a statically rendered site than to hang out indefinitely in the realtime uncanny valley. Keep that in mind as you _hypothetically_ plan a journey like this.
+It erodes the user's confidence that your app is giving them the information they need when they need it.
 
+Losing confidence means loss of trust. Loss of trust means users begin to treat your app as untrustworthy, refreshing pages that are real-time and telling people about the substandard experience. I have an app like this that I use weekly, and I'll guess that you could also come up with one like it if you thought for a minute.
 -->
+---
+
+### Our advice:
+# Avoid the Uncanny Valley
+<!--Plan for the transition, communicate clearly to your users, and don't spend long in the uncanny real-time valley.-->
+
+<!-- Move the slido to the feedback section -->
 
 ---
 
-<iframe src="https://wall.sli.do/event/m8rbTQytmGvESi6kW9HjF5?section=97e4b684-b7ed-41cf-9917-b60f4a485ca2" style="height:30rem;"></iframe>
+<iframe src="https://wall.sli.do/event/m8rbTQytmGvESi6kW9HjF5?section=97e4b684-b7ed-41cf-9917-b60f4a485ca2" style="height:33rem;"></iframe>
 
 ---
 
@@ -468,5 +650,8 @@ _footer: '![image](images/launchscout-logo_inverse.png)'
 _backgroundColor: #190641
 _color: white
  -->
+
 # Questions?
 ### launchscout.com
+
+
