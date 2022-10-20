@@ -190,11 +190,13 @@ Next slide: (Katie) Segue into the takeaway and intros
 <!--
 INTROS:
 
-Segue into the takeaway and intros
+So now is probably a good time to introduce ourselves and explain why we're talking to you all about this today.
 
-Katie
-
-Hi! My name is Katie Pohlman and I am a Principal UX Designer at Launch Scout. Launch Scout is a custom software development agency based in Cincinnati, OH. And we build custom web applications for our clients. My role there, as a Principal UX Designer, is two fold—as a member of the Principal Group, I am helping to grow and improve our team's skillset and helping to shape and define what it means to deliver well on projects at Launch Scout. As a UX Designer, I am leading the UX and UI design and then implementing those designs with HTML and CSS. So, I am on the front-end of things, and I'll let Tim introduce himself.
+- Katie
+- Launch Scout
+- Principal UX designer
+- What I do as Principal, what I do as designer
+- I am on the front-end side of things, let Tim introduce himself
 
 Tim 
 
@@ -259,7 +261,11 @@ Next slide: (Katie) The first problem we want to highlight today...
 
 (Katie)
 
-The first problem we want to highlight today is the problem of scarce resources. And this problem is probably most commonly seen in systems that handle inventory management, and an example of how that manifests itself is out of stock situations on ecommerce sites. So, let's look at ecommerce specifically. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event. And it is our job as designers and developers to make sure customers have the right information about an item at the right time to make informed decisions about that buying process. So, what state or status is the item in? Is it available for pre-order, is it available to purchase, is it out of stock? All of these things and more are questions that a customer has during the buying process.
+The first problem we want to highlight today is the problem of scarce resources. And this problem is probably most commonly seen in systems that handle inventory management, and an example of how that manifests itself is out of stock situations on ecommerce sites.
+
+So, let's look at ecommerce specifically. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event.
+
+And it is our job as designers and developers to make sure customers have the right information about the state or status of an item at the right time to make informed decisions about it during the buying process. 
 
 So let's take a look at what that may look like.
 
