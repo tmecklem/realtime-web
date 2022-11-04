@@ -481,7 +481,7 @@ There are other intentions with data, as well, obviously, and those intentions s
 
 All of this to say, that when you are displaying realtime data to your users, it's crucial to consider how that data is intended to be used. Because if you show them the data in realtime in a way that doesn't consider their intentions, you're actually going to cause them frustration instead of helping them.
 
-Next slide: (Tim) But wait there's more!
+Next slide: (Katie) But wait there's more!
 
  -->
  
@@ -498,7 +498,7 @@ Next slide: (Tim) But wait there's more!
 * Paging Data
 
 <!--
-(Tim or Katie?) In our experiences building real-time applications, we've run into a bunch of different problems. These range from managing how to update blockchain explorers with the latest transactions and smart contracts, handling disconnects for users bidding in web auctions, tracking vehicle position data and updating maps, and managing other IoT event data. We don't have time to talk through more examples, but we've got a bunch of experiences to share and we'd love to connect after the talk.
+(Katie) In our experiences building real-time applications, we've run into a bunch of different problems. These range from managing how to update blockchain explorers with the latest transactions and smart contracts, handling disconnects for users bidding in web auctions, tracking vehicle position data and updating maps, and managing other IoT event data. We don't have time to talk through more examples, but we've got a bunch of experiences to share and we'd love to connect after the talk.
  -->
 
 <!--
