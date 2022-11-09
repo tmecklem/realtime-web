@@ -503,7 +503,7 @@ Next slide: (Tim) demonstration of potential fixes
 <!--
 (Tim)
 
-I'll share a little secret with you. We shopped this problem around internally, and we struggled to find a really great catchall solution. 
+I'll share a little secret with you. I shopped this problem around internally, and we struggled to find a really great catchall solution. 
 
 Think about how Facebook solves this problem by curating the list dropp what the algorithm finds less "engaging".
 
@@ -602,7 +602,7 @@ But first, a quick poll! We'll hang out here for a minute or so while you add yo
 
 Thank you for sharing! This is really interesting!
 
-Next slide: (Tim) We had a lot of fun...
+Next slide: (Tim) I had a lot of fun...
 
 -->
 
@@ -613,7 +613,7 @@ Next slide: (Tim) We had a lot of fun...
 <!--
 (Tim)
 
-We had a lot of fun building the slides for this talk, because we chose technologies that support the end-to-end user experience as part of the framework.
+I had a lot of fun building the slides for this talk, because we chose technologies that support the end-to-end user experience as part of the framework.
 
 Perhaps more interesting is that there isn't a single line of javascript that we wrote to support any of this real-time behavior. 
 
@@ -667,7 +667,7 @@ frontend stacks
 backend stacks
 pancake stacks
 
-Choosing a "conversation capable" solution that combines channels and websockets alongside requests and responses seamlessy is a game-changer that we haven't seen in over a decade since we discovered ajax.
+Choosing a "conversation capable" solution that combines channels and websockets alongside requests and responses seamlessly is a game-changer that we haven't seen in over a decade since we discovered ajax.
 
 Beyond the technological advances, there's something else that makes adopting something like LiveView a force multiplier.
 
@@ -737,6 +737,13 @@ Losing confidence means loss of trust. Loss of trust means users begin to treat 
 
 ---
 
+# Content for this talk
+## github.com/tmecklem/realtime-web
+
+## Slides: MARP (marp.app)
+## Examples: Phoenix and LiveView (phoenixframework.org)
+
+---
 <!--
 _class: 'closing'
 _footer: '![image](images/launchscout-logo_inverse.png)'
