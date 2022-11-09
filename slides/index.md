@@ -109,20 +109,25 @@ _footer: '![image](images/launchscout-logo_inverse.png)'
 _backgroundColor: #190641
 _color: white
 -->
-# Designing Realtime Web Apps
-##### Katie Pohlman & Tim Mecklem
+# Designing Real-time Web Apps
+##### Tim Mecklem
+##### VP of Engineering & Delivery
 
 ---
 
 <iframe src="https://wall.sli.do/event/m8rbTQytmGvESi6kW9HjF5?section=97e4b684-b7ed-41cf-9917-b60f4a485ca2" style="height:33rem;"></iframe>
 
 <!-- 
-(Tim)
-
 Let's start today's real-time talk with a little real-time poll. What is your primary role in software development?
 
-Thank you for those answers. I think we have a little something for everyone today, so let's get started!
+Any embedded devs? Ok good or uh-oh.
 
+Have to spend the first 30 mintues of the talk arguing about what real-time means. To be clear, this talk
+is about building web apps that adapt to data that changes in real-time, not building hard real time
+software for specialty hardware and operating systems. If you're here for that, you'll find that despite my IoT experience I'm woefully unprepared for that battle.
+
+
+Thank you for those answers. I think we have a little something for everyone today, so let's get started!
  -->
 
 ---
@@ -135,26 +140,54 @@ Thank you for those answers. I think we have a little something for everyone tod
 
 Here's a question to ponder
 
-Before the web, rich client apps connected to on premise databases
+Prior to the web, we already had rich client apps connected to onsite databases that updated information live
 Green screen apps connected to mainframes
-Slower hardware, but often more up to the minute information for important decisions
+Was slower hardware, but often more up to the minute information for important decisions
 
-Web based on request from browser triggering a response is more constrained
-Conditioned us to expect a static snapshot of information rather than the fluid reality
+Along comes the web with HTTP and the HTML document format, and we reconditioned ourselves
+to a world full of staccato requests and responses, always initiated by the browser client.
 
-But information isn't static.
+And what was initially static webpages became server-side dynamically generated HTML. But it was still
+just a static snapshot early on. 
+
+Next slide: But information isn't static.
+-->
+
+---
+
+# Information isn't static
+
+<!--
 We know data in our systems changes constantly
 Inventory changes, 
-forum users posting, emoji reactions flying all over the place
+forum users posting,
+emoji reactions flying all over the place
 simultaneous document editing
+Election results are tabulated and reported incrementally (how many watched the elections results pour in?)
+
+Next slide: Flights get delayed
+-->
+
+---
+
+<p style="text-align: center;">
+  <img src="images/delayed_flight.png"></img>
+</p>
+
+
+<!--
+Flights get delayed (how many people had flights delayed on the way here like me?)
+
+It has always been like this, data always moving.
 
 Some apps had to be realtime from the start due to the domain, others have been able to sidestep it.
 
-I'd argue that we're entering a stage in web product development that users are beginning to expect relevant information to be updated as it changes, not as they request it.
+I've seen evidence we're entering a stage in web product development that users are beginning to expect relevant information to be updated as it changes, not as they request it.
 
-The exciting news is that web technologies have advanced far enough to support seamless realtime interactions, and we've entered a new period that allows us the convenience of writing apps that reflect shift in reality with a similar effort to the days before websockets and push notifications.
+I'm betting you're seeing requests to build realtime features more frequently too.
 
-Next Slide: (Tim) Our industry has a good problem.
+
+Next Slide: Our industry has a good problem
 -->
 
 ---
@@ -165,21 +198,49 @@ Next Slide: (Tim) Our industry has a good problem.
 
 <!--
 
-Our industry has a good problem. 
+Next Slide: Our industry has a good problem.
+
+The exciting news is that web technologies have advanced far enough to support seamless realtime interactions, and we've entered a new period that some emerging tools are up to the challenge.
+
 Fully capable languages and frameworks to solve the real-time needs of our users.
+
 What I've observed in working across business domains with large and small multidisciplinary teams alike
 Struggling in the execution of applying technology to improve the experience.
 
-Sometimes we're stuck using technologies that are less fit to deliver this different paradigm where these rich experiences are first class citizens of the technical architecture. 
+Sometimes we're using tool that are modern and give richness, but don't lower the barriers to building realtime features as first-class concerns.
 Sometimes we fail to understand the needs of our users and how to support them.
 
 I think most of our difficulties lie in the paradigm shift. 
 
-Need new vocabulary for this kind of real-time experience, and today I'll use the phrase "conversation-capable" to describe technology that has built-in support for a constant bidirectional conversation between the information and the user.
+Need new vocabulary for this kind of real-time experience, and today I'll use the phrase "conversation-capable" to describe technology that has first-class support for a constant bidirectional conversation between the information and the user.
 
 But languages and frameworks are only a part of building real-time experiences. Other factors are more important, and they should be driving our decisions about technology.
 
-Next slide: (Katie) Segue into the takeaway and intros
+Next slide: Segue into the takeaway and intros
+-->
+
+---
+
+## Tim Mecklem
+##### VP of Engineering & Delivery
+##### launchscout.com
+##### @tim_mecklem (Twitter)
+##### timothymecklem (LinkedIn)
+##### @tim_mecklem@ruby.social (Mastodon)
+
+<!--
+
+So now is probably a good time to introduce myself and explain why I'm talking to you all about this today.
+
+Tim 
+
+VP of Engineering and Delivery
+Worked in enterprise Java, led native mobile teams, and have fallen in love with small mighty teams solving big problems with innovative technology.
+20 years of experience
+
+I was around for the first exciting JS part where we learned about XMLHTTPRequest and started to treat JavaScript as more than form validation code
+Went through the Douglas Crockford era of "The Good Parts"
+excited to talk about this, because we're on the cusp of something as momentous to the web industry as asynchronous json was more than a decade ago.
 -->
 
 ---
@@ -187,41 +248,29 @@ Next slide: (Katie) Segue into the takeaway and intros
 ### The takeaway
 # Realtime user experiences require <br/><u>end-to-end</u> solutions.
 
-<!--
-INTROS:
-
-So now is probably a good time to introduce ourselves and explain why we're talking to you all about this today.
-
-- Katie
-- Launch Scout
-- Principal UX designer
-- What I do as Principal, what I do as designer
-- I am on the front-end side of things, let Tim introduce himself
-
-Tim 
-
-VP of Engineering and Delivery
-Worked in enterprise Java, led native mobile teams, and have fallen in love with small mighty teams solving big problems with innovative technology.
-20 years of experience
-excited to talk about this, because we're on the cusp of something as momentous to the web industry as asynchronous json was more than a decade ago.
--->
 
 <!--
-(Katie)
-Before we dig in, though, there is something that I want to call attention to. As a designer, I know that when we're talking about delivering information in real-time in a way that provides value to our users—what information to expose to them, how frequently, when should we surface it, etc—it's easy to assign that responsibility to the UI/UX designers and move on. You know, it's the designers' responsibility to research, learn, and decide what the app should do and how it should look and how it should flow. But, if there's only one thing you take away from this talk, let it be this: Building modern, trustworthy realtime web applications is not just a design concern. **[repeat that].** It's not even just a front-end concern. It's a full stack, end-to-end concern—and everyone on the team should take ownership and responsibility for it.
+No matter what you answered on the first poll, this talk is for you.
+
+I don't say that just to keep you in your seat, but because every one of these roles is critical to the success of building these kinds of apps
+
+Real time UX isn't someone else's problem on your team.
+Real-time event driven backends aren't someone else's problem.
+To build these apps, it's an end-to-end problem with eveyone architecting solutions with the outcome in mind
+
+This is as full-stack a problem as you'll encounter.
  -->
 
 <!--
-So, regardless of your role on your team—designer, frontend developer, or backend developer, whatever it may be—don't tune out the stuff today that seems unrelated to your work. It's not. As we'll demonstrate, we can't meet users' realtime needs without end-to-end solutions.
+So, regardless of your role on your team—designer, frontend developer, or backend developer, whatever it may be—don't tune out the stuff today that seems unrelated to your work. It's not. 
 
-Next slide: (Tim) If web technologies were a step backward in...
+Next slide: If web technologies were a step backward in...
 -->
 
 ---
 
 # The state of real-time web applications
 
-<!-- Tim  approx 3 minutes -->
 <!--
 
 If web technologies were a step backward in building soft realtime apps, why are we using them?
@@ -249,7 +298,7 @@ A lot of problems exist becuase of the mismatch of the abstraction between what 
 
 With that in mind, let's talk about the principles through some common problems for realtime apps.
 
-Next slide: (Katie) The first problem we want to highlight today...
+Next slide: The first problem we want to highlight today...
  -->
 
 ---
@@ -259,8 +308,6 @@ Next slide: (Katie) The first problem we want to highlight today...
 
 <!--
 
-(Katie)
-
 The first problem we want to highlight today is the problem of scarce resources. And this problem is probably most commonly seen in systems that handle inventory management, and an example of how that manifests itself is out of stock situations on ecommerce sites.
 
 So, let's look at ecommerce specifically. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event.
@@ -269,7 +316,7 @@ And it is our job as designers and developers to make sure customers have the ri
 
 So let's take a look at what that may look like.
 
-Next slide: (Tim) commerce example
+Next slide: commerce example
  -->
 
 ---
@@ -288,7 +335,7 @@ Next slide: (Tim) commerce example
 
 <!--
 
-*Tim, stick the the description of what you're doing, not a lot of narrative. Katie does this in hers!*
+**Stick the the description of what you're doing, not a lot of narrative.*
 
 Note that there's actually a worse scenario where both succeed but there's only one product to fulfill both orders
 
@@ -310,20 +357,26 @@ Ok so let's talk problems. You probably see the most obvious ones.
 
 Not great!
 
-Next slide: (Katie) Those are all problems...
+Next slide: Those are all problems...
 
 -->
 
 <!--
-Katie
+Those are problems. They are tactical problems. They are our problems, from a business perspective.
 
-Those are all problems, for sure, but they're tactical problems about the system or create process problems outside of the system. I want to take us a little deeper and ask you all  put on your empathy hats, and think about how this is affecting the customer's **experience**. You have two people who are both trying to buy the same thing. They both add it to their cart and one gets distracted or something comes up and they decide they'll check out later. In the meantime, the other makes a decision and the item goes out of stock. Now, the first person comes back to the page and it still looks like the item is available and then they get hit with an error, seemingly out of nowhere. The person who ended up not being able to purchase the scarf may feel a sense of betrayal or frustration. The entire time while shopping, they had no reason to believe that they should have acted faster.
+But let's step back one level and think about it differently.
 
-Maybe they were wanting to buy that scarf as a birthday present for their grandmother. And if they had known it was the last one, they would have acted faster. Or if they had known they only had a certain amount of time to keep that item in their cart, they would have made a different decision. Now, because we didn't provide the user with accurate, realtime information, We've now created a problem for the user that they could have avoided had they had all the information when they needed it.
+How is the user feeling right now? Because what we did was take our problem, and we put it onto the user.
+
+We don't know their motivations or their desires or what they need. Maybe Tim had a very strong sentimental reason to buy that scarf and we did the equivalent of ripping it out of his cart before he could check it out.
+
+What are his options now?
+
+Maybe find a different one. Maybe go somewhere else to buy it. Maybe he doesn't have any options. We certainly left him in a dead end situation in the interface right?
 
 So, while the solution prevents a system problem of two people purchasing the same item, it actually ignores the people problem that it creates by not allowing them to make informed decisions based on accurate information.  
 
-So what does a better solution look like?
+So what does one example of a better solution look like?
 
 Next slide: (Tim) demo of better solution
 
@@ -350,24 +403,23 @@ Two things to note:
 1: Entire system updates to reflect inventory ups and downs
 2: User with item in cart has a visual timer to let them know they are on a time limit
 
-Next slide: (Katie) Why is this better?
+Next slide: Why is this better?
 
 -->
 
 ---
-### Why is this better?
-# Exposes the state of things to the user
+### Principle
+# Value and respect the user's agency
 
 <!--
-(Katie)
 
-Why is this better? While there is still a bit of a race condition in that someone's "Add to Cart" button is disabled when they may be moving their cursor to click it, they at least are not able to to move forward in that process under false pretenses. Think of it as two people reaching for the same item on a shelf at the store. And the other person grabs it before you can get to it. While that may be awkward or frustrating and even rude, you at least know immediately that you can't get the thing that you were reaching for, so you go look for something else.
+Why is this better? While there is still a bit of a race condition in that someone's "Add to Cart" button is disabled when they may be moving their cursor to click it, they at least are not able to to move forward in that process under a mistaken belief that they have ahold of that item. We haven't added insult to injury by misleading _and_ disappointing them.
 
-We're mimicking reality in this situation and letting users know the information as we know it so that they are aware of what they're actually able to do in the system. And we're not allowing them to move forward in the process under false pretenses. So they know when an item is "claimed" by another customer. And that other customer knows that they have a set amount of time to decide before they no longer have "dibs" on that item. So, it's really important in these types of situations, to make sure you are exposing the state of an item to the user, so that they know what they are able to do with it.
+And that other customer knows that they have a set amount of time to decide before they no longer have "dibs" on that item. So, it's really important in these types of situations, to make sure you are exposing the state of the system to the user as changes happen, so that they are able to make intelligent decisions with information.
 
-We haven't given them a dead end
+We want to value and respect the user's agency
 
-Next slide: (Katie) Alright, we've talked about systems that manage resources...
+Next slide: Alright, we've talked about systems that manage resources...
 
 -->
 
@@ -376,9 +428,17 @@ Next slide: (Katie) Alright, we've talked about systems that manage resources...
 # Rapid influx of data
 
 <!--
-(Katie)
+Alright, we've talked about systems that manage resources and making sure that we are exposing the realtime state of those resources to the user. 
 
-Alright, we've talked about systems that manage resources and making sure that we are exposing the realtime state or status of those resources to the user. And there are other types of systems that benefit from realtime data, as well. And one of the others that we want to highlight today are systems that handle rapidly changing data—so things like social media, or a news site, or maybe a polling system, or a dashboard of some sort. There are lots of examples of these types of systems. But the problem that presents itself in these systems is that we need to decide how to display the data to the user in a way that is not overwhelming. So, you can forgo it entirely and not worry about updating in real time. Which is bad because then your users don't know if the data their seeing is accurate and could be making a bad decision based on it or are just unaware of something that is happening. Or, you can decide to display the data coming in in realtime, which then raises the question of how to do that well.
+There are other types of systems where users benefit from realtime data, as well. And one of the others that we want to highlight today are systems that handle rapidly changing data
+
+things like social media, or a news site, or maybe a polling system, or a dashboard of some sort. 
+
+There are lots of examples of these types of systems. But the problem that presents itself in these systems is that we need to decide how to display the data to the user in a way that is not overwhelming. 
+
+Options: you can forgo it entirely and not worry about updating in real time. Which is bad because then your users don't know if the data their seeing is accurate and could be making a bad decision based on it.
+
+You can decide to display the data coming in in realtime, which then raises the question of how to do that well.
 
 But, let's take a look first:
 
@@ -411,9 +471,11 @@ This is just a great feed of wonderful content, lots of tragedy quotes, perfect 
 
 Decent rate of information, can read it and stay connected with the whereabout of that Romeo character
 
+But it starts feeling more like a job
+
 But what happens when the garden hose becomes a firehose?
 
-Next slide: (Katie) What are the problems? So, that seems pretty obvious...
+Next slide: What are the problems? So, that seems pretty obvious...
 -->
 
 ---
@@ -462,26 +524,34 @@ _Increase rate slider until it's moving too fast even for the relevancy filter_
 
 As you can see, everything has limits, including our solution. Data firehose problems present an especially hard balance to strike to find what the user really needs to be able to do. 
 
-Next slide: (Katie) Why is this better?
+Next slide: Why is this better?
 
 -->
 
 ---
-### Why is this better?
-# Considers the intent of the data
+### Principle
+# Give the user quality over quantity
 
 <!--
-(Katie)
+Why is this better? This is better because it considers the relationship of the data to the user.
 
-Why is this better? This is better because it considers the intent of the data. In this example, the data coming in is meant to be read. So instead of just displaying the posts as they come in and pushing everything down to where it's not readable because it is constantly moving—we're keeping everything in its place so that it can be consumed. And we're also letting you know that there is more to be seen when you are ready to see it.
+In this example, the posts in are intended to be read. So instead of just displaying all the posts as they come in and pushing everything down to where it's not readable because it is constantly moving
 
-So, with our empathy hats on, we're thinking about what the user is intending to do with the data. Like I said, this example shows data that is meant to be read, so we are letting that happen—we're letting the user do what they need to do with the data, while also updating the page in realtime to let them know what is happening without interrupting them. So you have to think about what your user is trying to accomplish and make sure your solution supports that. You can't just spew a bunch of data on the screen and say, "Tada, it's realtime!" Because, depending on how you do it, it can actually be a bad thing.
+We respect the user's focus and don't replace surprise them by replacing what they're reading on a whim. And like earlier, we also value their agency to decide when to read more of the feed.
 
-There are other intentions with data, as well, obviously, and those intentions should inform how you display the data to your users. So perhaps you have an email campaign that went out and you're really interested about where the campaign was most effective. You're getting data about who opened the emails, where they are, what time they opened them, etc. But it's likely not going to be helpful to see that data in a table in realtime because you can't really do anything with it without manipulating the data. What may actually be more helpful is to display that on a map and have sort of like a heat map of where emails are being opened geographically, and as they're being opened the heat map would adjust. This actually makes me think about the political maps everyone sees during an election. You could have the states gradually turning blue or red as votes are counted and you can visualize how the votes are shaping up in realtime.
+We also use our full team's ability, including the data science team's relevancy score to give the user the choice for a better quality feed if they would like. This allows them to build trust with our solution without forcing it upon them.
 
-All of this to say, that when you are displaying realtime data to your users, it's crucial to consider how that data is intended to be used. Because if you show them the data in realtime in a way that doesn't consider their intentions, you're actually going to cause them frustration instead of helping them.
+Like I mentioned earlier, using a pause or a metadata filter might not be the best solution for every firehose type of problem. 
 
-Next slide: (Katie) But wait there's more!
+But a key here is that just because you can flip a switch and give your users all the content all the time, it's not always better to do more.
+
+A couple of other options you could do once the content firehose becomes too full:
+Try aggregating the metadata in a useful way to break down. You could give meaningful statistics about the feed to allow the user to know what's happening at a high level without forcing them to read everything literally.
+You could find creative visualizations of the metadata like the location to help them see geographically where their friends are and alow them to filter based off that visual segmentation.
+
+All of this to say, that when you are displaying realtime data to your users, it's crucial to consider the quality of the experience more than the quantity of event driven things you can show them. Because if you show them the data in realtime in a way that doesn't consider their goals, you're actually going to cause them frustration instead of helping them.
+
+Next slide: But wait there's more!
 
  -->
  
@@ -493,17 +563,32 @@ Next slide: (Katie) But wait there's more!
 * Collaborative Editing/Drawing
 * Handling Disconnects Gracefully
 * Managing Notifications Across Multiple Connected Devices
-* Integrating IoT and Other Non-web Events
 * Dynamic Maps and Location Based Services
 * Paging Data
+* Integrating IoT and Other Non-web Events
 
 <!--
-(Katie) In our experiences building real-time applications, we've run into a bunch of different problems. These range from managing how to update blockchain explorers with the latest transactions and smart contracts, handling disconnects for users bidding in web auctions, tracking vehicle position data and updating maps, and managing other IoT event data. We don't have time to talk through more examples, but we've got a bunch of experiences to share and we'd love to connect after the talk.
- -->
+In our experiences building real-time applications, we've run into a bunch of different problems. These range from managing how to update blockchain explorers with the latest transactions and smart contracts, handling disconnects for users bidding in web auctions, tracking vehicle position data and updating maps, and managing other IoT event data. We don't have time to talk through more examples, but we've got a bunch of experiences to share and we'd love to connect after the talk.
+ 
+Think about session handoff, when to do it and when not. A realtime update of a user's cart when they transition from a site on their phone to their desktop is a delight. A user that has two tabs open of your site and is using the left one to filter data to update things on the right, you don't want those to stay in sync.
+
+One of the apps I use weekly has a bug where the search filter is shared between tabs in the same user session. Which means I can scroll down on a different tab and get paged results from the other tab's updated filter and I get a mess of results that don't make sense. Consider how state is shared in your application, and build mechanisms beyond just the local storage or user session to keep realtime data in sync.
+
+
+Handle disconeccts in a way that lets people know that the realtime experience they expect from your app isn't what they're getting at the moment. Give them a way to refresh or reconnect and show them the status of the connection.
+
+
+Notifications across devices is crazy tricky to get right. Consider what things need to show up everywhere immediately, and what things might be better in a batch if there are multiple events coming in that would generate alerts. Everyone has gotten that one app that sends notifications too often. Don't be that app, but do keep your users updated.
+
+Paging Data is a particularly interesting one, because most of us probably consider it "solved". But solved for a realtime app might not look like paging using an offset and a page size. What happens when new information comes in, or even if information is interleaved in the database in a place that changes the window of the current page? You get duplicates or missed rows in the paged data.
+
+A better solution might use a timestamp field and a "last_viewed" index instead of an offset to capture those changes without changing the paging code's assumption of static underlying data.
+
+Treat non-web events the same as web events
+-->
 
 <!--
-(Katie)
-We've been talking a lot about how to best display data in realtime, and it's been heavily focused on the design/front-end side of things. And I told you this is a end-to-end responsibility. So, let's bring it full-circle.
+I've been talking a lot about how to best display data in realtime, and it's been heavily focused on the design/front-end side of things. And I told you this is a end-to-end responsibility. So, let's bring it full circle and talk tech.
 
 <!-- Move the slido to the word cloud section -->
 
@@ -561,6 +646,8 @@ Without going into the nitty gritty details, the thing that makes LiveView stand
 Because these processes power the backend business layer as well as each individual conversation with the clients over channels and websockets, the entire system looks a bit different than the typical n-tier architecture. Instead of layer by layer calls and responses, think neurons and synapses where some of those signals travel directly to the browser of every connected user in real-time vs waiting for client-side action.
 
 Okay, I'll end my little love note here and get back on track.
+
+Because I'm not trying to convince you to abandon the things you love. The opposite is true. I'm hoping that this kind of game changing technology can break down the barriers for the monotonous boilerplate and crud so that frontend teams can devote more time in the innovative and creative parts of building frontends.
 
 Next slide: (Tim) Can you build a...
 -->
