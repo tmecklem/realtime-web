@@ -773,7 +773,7 @@ end
 
 # Template
 
-```heex
+```html
 Welcome, <%= @user.name %>
 <span style="float: right;">
   <%= link "View Cart", to: Routes.better_cart_show_path(...) %>
