@@ -748,3 +748,79 @@ _color: white
 ### launchscout.com
 
 
+---
+
+# Frontend Code!
+## Called on SSR and then as client connects via websocket
+
+```elixir
+def handle_params(%{"sku" => sku}, socket) do
+  # lookup information from database, etc
+  user = fetch_user_from_database()
+  product = get_product!(sku)
+
+  if connected?(socket), do: InventoryEvents.listen_for_events(product)
+
+  {:noreply,
+   socket
+   |> assign(:user, user)
+   |> assign(:product, product)
+   |> assign(:button_state, button_state(user, product))}
+end
+```
+
+---
+
+# Template
+
+```heex
+Welcome, <%= @user.name %>
+<span style="float: right;">
+  <%= link "View Cart", to: Routes.better_cart_show_path(...) %>
+</span>
+
+<h1>Products</h1>
+<h2><%= @product.name %></h2>
+<%= @product.stock_level %> in stock
+<p>
+  <button style="margin-top: 20px;" phx-click="add_to_cart" 
+   disabled={elem(@button_state, 0)}><%=elem(@button_state, 1)%> />
+</p>
+```
+
+---
+
+# Handling events
+## Events are handled similarly regardless of origin
+
+```elixir
+  # browser event
+  def handle_event("add_to_cart", _value, socket) do
+    if BetterCommerce.exclusive_add_to_cart(...) do
+      {:noreply, 
+        socket 
+        |> push_navigate(to: Routes.better_cart_show_path(...))
+      }
+    end
+  end
+
+  # backend event
+  def handle_info({:inventory_changed, %Product{sku: sku} = product}, socket) do
+    {:noreply,
+      socket
+      |> assign(:button_state, button_state(socket.assigns.user, product))
+      |> assign(product: product)
+    }
+  end
+```
+
+---
+
+# Backend Code!
+
+```elixir
+  updated_product = %{product | stock_level: stock_level - 1}
+
+  Repo.update!(updated_product)
+  InventoryEvents.notify(sku, :inventory_changed, updated_product)
+```
