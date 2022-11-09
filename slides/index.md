@@ -122,7 +122,7 @@ Let's start today's real-time talk with a little real-time poll. What is your pr
 
 Any embedded devs? Ok good or uh-oh.
 
-Have to spend the first 30 mintues of the talk arguing about what real-time means. To be clear, this talk
+Have to spend the first 30 minutes of the talk arguing about what real-time means. To be clear, this talk
 is about building web apps that adapt to data that changes in real-time, not building hard real time
 software for specialty hardware and operating systems. If you're here for that, you'll find that despite my IoT experience I'm woefully unprepared for that battle.
 
@@ -255,8 +255,9 @@ No matter what you answered on the first poll, this talk is for you.
 I don't say that just to keep you in your seat, but because every one of these roles is critical to the success of building these kinds of apps
 
 Real time UX isn't someone else's problem on your team.
-Real-time event driven backends aren't someone else's problem.
-To build these apps, it's an end-to-end problem with eveyone architecting solutions with the outcome in mind
+Real-time event architectures aren't someone else's problem.
+To build these apps, it's an end-to-end problem with everyone working together and 
+architecting solutions with the outcome in mind
 
 This is as full-stack a problem as you'll encounter.
  -->
@@ -308,9 +309,9 @@ Next slide: The first problem we want to highlight today...
 
 <!--
 
-The first problem we want to highlight today is the problem of scarce resources. And this problem is probably most commonly seen in systems that handle inventory management, and an example of how that manifests itself is out of stock situations on ecommerce sites.
+The first problem we want to highlight today is the problem of scarce resources. And this problem is probably most commonly seen in systems that handle inventory management, and an example of how that manifests itself is out of stock situations on commerce sites.
 
-So, let's look at ecommerce specifically. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event.
+So, let's look at commerce specifically. There is a reality for most e-commerce sites, that customers are interacting with digital representations of a physical inventory. And that means there is a constraint, or a limit, to the number of items that can actually be sold. Take event tickets as an example. There is a limit to the number of tickets that can be sold for an event because there is a physical limit to the number of people who can attend that event.
 
 And it is our job as designers and developers to make sure customers have the right information about the state or status of an item at the right time to make informed decisions about it during the buying process. 
 
@@ -357,11 +358,6 @@ Ok so let's talk problems. You probably see the most obvious ones.
 
 Not great!
 
-Next slide: Those are all problems...
-
--->
-
-<!--
 Those are problems. They are tactical problems. They are our problems, from a business perspective.
 
 But let's step back one level and think about it differently.
@@ -639,7 +635,7 @@ Next slide: (Tim) In our case...
 * .NET and Blazor
 
 <!--
-In our case, we chose Phoenix and LiveView for this demo. There are other approximations to this technology in other stacks.
+For this talk, I chose Phoenix and LiveView for this demo. There are other approximations to this technology in other stacks.
 
 Without going into the nitty gritty details, the thing that makes LiveView stand out from even the others on this list is its foundation on an Erlang technology called OTP. OTP allows us to have thousands or even millions of tiny lightweight processes holding state and sending each other messages and events, with sophisticated lifecycle management.
 
