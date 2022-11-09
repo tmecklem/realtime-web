@@ -824,3 +824,37 @@ Welcome, <%= @user.name %>
   Repo.update!(updated_product)
   InventoryEvents.notify(sku, :inventory_changed, updated_product)
 ```
+
+---
+
+# How do I get started with this?
+
+Talk with me!
+
+-- or --
+
+_slightly dated_
+Build a real-time Twitter clone in 15 minutes with LiveView and Phoenix 1.5
+
+https://www.youtube.com/watch?v=MZvmYaFkNJI
+
+---
+
+# But will it scale?
+
+Yes.
+
+* https://phoenixframework.org/blog/the-road-to-2-million-websocket-connections
+* https://2022.elixirconf.com/speakers/zack-kayser
+* https://davelucia.com/blog/observing-elixir-with-lightstep
+
+---
+
+
+# Thank you!
+## Tim Mecklem
+##### VP of Engineering & Delivery
+##### launchscout.com
+##### @tim_mecklem (Twitter)
+##### timothymecklem (LinkedIn)
+##### @tim_mecklem@ruby.social (Mastodon)
