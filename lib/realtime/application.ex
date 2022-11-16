@@ -12,7 +12,6 @@ defmodule Realtime.Application do
   def start(_type, _args) do
     children = [
       # Phoenix/Ecto
-      Realtime.Repo,
       {Phoenix.PubSub, name: Realtime.PubSub},
       RealtimeWeb.Endpoint,
 

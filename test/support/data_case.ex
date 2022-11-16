@@ -18,8 +18,6 @@ defmodule Realtime.DataCase do
 
   using do
     quote do
-      alias Realtime.Repo
-
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
@@ -28,16 +26,7 @@ defmodule Realtime.DataCase do
   end
 
   setup tags do
-    Realtime.DataCase.setup_sandbox(tags)
     :ok
-  end
-
-  @doc """
-  Sets up the sandbox based on the test tags.
-  """
-  def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Realtime.Repo, shared: not tags[:async])
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 
   @doc """
