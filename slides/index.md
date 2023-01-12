@@ -127,7 +127,7 @@ is about building web apps that adapt to data that changes in real-time, not bui
 software for specialty hardware and operating systems. If you're here for that, you'll find that despite my IoT experience I'm woefully unprepared for that battle.
 
 
-Thank you for those answers. I think we have a little something for everyone today, so let's get started!
+Thank you for those answers. This talk has a little something for everyone today, so let's get started!
  -->
 
 ---
@@ -163,7 +163,6 @@ Inventory changes,
 forum users posting,
 emoji reactions flying all over the place
 simultaneous document editing
-Election results are tabulated and reported incrementally (how many watched the elections results pour in?)
 
 Next slide: Flights get delayed
 -->
@@ -176,7 +175,7 @@ Next slide: Flights get delayed
 
 
 <!--
-Flights get delayed (how many people had flights delayed on the way here like me?)
+FAA flight systems go down and planes get grounded because of the lack of realtime data... (too soon?)
 
 It has always been like this, data always moving.
 
@@ -207,10 +206,10 @@ Fully capable languages and frameworks to solve the real-time needs of our users
 What I've observed in working across business domains with large and small multidisciplinary teams alike
 Struggling in the execution of applying technology to improve the experience.
 
-Sometimes we're using tool that are modern and give richness, but don't lower the barriers to building realtime features as first-class concerns.
+Sometimes we're using modern tools that help us build rich and beutiful frontends with interactivity, but don't really lower the barriers to building realtime features as first-class concerns.
 Sometimes we fail to understand the needs of our users and how to support them.
 
-I think most of our difficulties lie in the paradigm shift. 
+I think most of our difficulties lie in the paradigm shift...
 
 Need new vocabulary for this kind of real-time experience, and today I'll use the phrase "conversation-capable" to describe technology that has first-class support for a constant bidirectional conversation between the information and the user.
 
@@ -246,7 +245,8 @@ excited to talk about this, because we're on the cusp of something as momentous 
 ---
 
 ### The takeaway
-# Realtime user experiences require <br/><u>end-to-end</u> solutions.
+# Real-time user experiences require<br/><i>full-team</i>, <i>full-stack</i> solutions.
+## Corollary:<br/>This is not <i>just</i> a frontend dev or UX designer's problem.
 
 
 <!--
@@ -413,7 +413,7 @@ Why is this better? While there is still a bit of a race condition in that someo
 
 And that other customer knows that they have a set amount of time to decide before they no longer have "dibs" on that item. So, it's really important in these types of situations, to make sure you are exposing the state of the system to the user as changes happen, so that they are able to make intelligent decisions with information.
 
-We want to value and respect the user's agency
+We want to value and respect the user's agency.
 
 Next slide: Alright, we've talked about systems that manage resources...
 
@@ -738,6 +738,7 @@ Losing confidence means loss of trust. Loss of trust means users begin to treat 
 
 ## Slides: MARP (marp.app)
 ## Examples: Phoenix and LiveView (phoenixframework.org)
+## Running app: https://realtime-web.fly.dev
 
 ---
 <!--
